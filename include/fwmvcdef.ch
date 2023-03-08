@@ -1,5 +1,5 @@
-#INCLUDE "PARMTYPE.CH"
-#INCLUDE "FWMBROWSE.CH"
+#INCLUDE "parmtype.ch"
+#INCLUDE "fwmbrowse.ch"
 
 //------------------------------------------------------------
 //Conjunto de especificacoes do ProtheusFunctionMVC
@@ -14,10 +14,11 @@
 #DEFINE FORM_STRUCT_TABLE_BROWSE      8
 #DEFINE FORM_STRUCT_TABLE_RULES       9
 
-#DEFINE FORM_STRUCT_TABLE_ALIAS_ID          1
-#DEFINE FORM_STRUCT_TABLE_ALIAS_PK          2
-#DEFINE FORM_STRUCT_TABLE_ALIAS_DESCRIPTION 3
+#DEFINE FORM_STRUCT_TABLE_ALIAS_ID            1
+#DEFINE FORM_STRUCT_TABLE_ALIAS_PK            2
+#DEFINE FORM_STRUCT_TABLE_ALIAS_DESCRIPTION   3
 #DEFINE FORM_STRUCT_TABLE_ALIAS_REALNAMEBLOCK 4
+#DEFINE FORM_STRUCT_TABLE_ALIAS_VERSION       5
 
 #DEFINE FORM_STRUCT_TABLE_INDEX_ORDEM       1
 #DEFINE FORM_STRUCT_TABLE_INDEX_ID          2
@@ -52,7 +53,8 @@
 #DEFINE MVC_BUTTON_DISABLE    6
 #DEFINE MVC_BUTTON_ID         7
 #DEFINE MVC_BUTTON_TOOLBAR    8
-
+#DEFINE MVC_BUTTON_REALTITLE  9
+#DEFINE MVC_BUTTON_ACCNAME   10
 //------------------------------------------------------------
 // Ordem do aToolBar do ToolBarDef
 //------------------------------------------------------------
@@ -114,6 +116,7 @@
 #DEFINE STRUCT_FEATURE_WHEN       2
 #DEFINE STRUCT_FEATURE_INIPAD     3
 #DEFINE STRUCT_FEATURE_PICTVAR    4
+#DEFINE STRUCT_FEATURE_PICBRV    5
 
 //------------------------------------------------------------
 // Array de AddRules da Estrutura do Model
@@ -256,6 +259,8 @@
 #DEFINE MVC_VIEW_INSERTLINE    18
 #DEFINE MVC_VIEW_WIDTH         19
 #DEFINE MVC_VIEW_MODAL         20
+#DEFINE MVC_VIEW_PICBRV        21
+#DEFINE MVC_VIEW_OBFUSCATED	   22	
 
 #DEFINE MVC_MODEL_TITULO   1
 #DEFINE MVC_MODEL_TOOLTIP  2
@@ -283,6 +288,7 @@
 #DEFINE VIEW_BUTTON_ERROR  -1
 #DEFINE VIEW_BUTTON_OK      0
 #DEFINE VIEW_BUTTON_CANCEL  1
+#DEFINE VIEW_BUTTON_OK_AND_NEW  2
 
 //------------------------------------------------------------
 #DEFINE OP_PESQUISAR 	1
@@ -292,6 +298,18 @@
 #DEFINE OP_EXCLUIR		5
 #DEFINE OP_IMPRIMIR	 	8
 #DEFINE OP_COPIA	 	9
+
+//------------------------------------------------------------
+// Verbos do observer do Model
+//------------------------------------------------------------
+#DEFINE MODEL_OBS_COMMIT "COMMIT"
+#DEFINE MODEL_OBS_COMMIT_AFTER "AFTER"
+#DEFINE MODEL_OBS_COMMIT_BEFORE_TTS "BEFORE_TTS"
+#DEFINE MODEL_OBS_COMMIT_BEFORE "BEFORE"
+#DEFINE MODEL_OBS_COMMIT_IN_TTS "IN_TTS"
+#DEFINE MODEL_OBS_COMMIT_AFTER_TTS "AFTER_TTS"
+#DEFINE MODEL_OBS_COMMIT_DELETE "DELETE"
+
 
 
 #xcommand ADD FWTOOLBUTTON <aToolBar> ;
@@ -354,6 +372,7 @@
 		;;
 		<oBrowse> := FWMBrowse():New() ;;
 		<oBrowse>:SetAlias( <cMasterAlias> ) ;;
+		<oBrowse>:SetDescription( <cDescription> ) ;;
 		<oBrowse>:SetMenuDef( <cSource> ) ;;
 		If !Empty( <cFilter> ) ;;
 			<oBrowse>:SetFilterDefault( <cFilter> ) ;;
@@ -608,6 +627,7 @@
 		;;
 		<oBrowse> := FWMBrowse():New() ;;
 		<oBrowse>:SetAlias( <cMasterAlias> ) ;;
+		<oBrowse>:SetDescription( <cDescription> ) ;;
 		<oBrowse>:SetMenuDef( <cMenuDef> ) ;;
 		If !Empty( <cFilter> ) ;;
 			<oBrowse>:SetFilterDefault( <cFilter> ) ;;
@@ -811,4 +831,9 @@
 	=>;
 		Web Function <name>_PMR_();;
 		Return {{"name",\"<name>\"},{"type","model"}[,{"source",\"<source>\"}][,{"resObject",\"<resObject>\"}]}
+
+#xcommand PUBLISH USER MODEL REST NAME <name> [ SOURCE <source> ] [ RESOURCE OBJECT <resObject> ] ;
+	=>;
+		User Function <name>_PMR_();;
+		Return {{"name",\"<name>\"},{"type","user_model"}[,{"source",\"<source>\"}][,{"resObject",\"<resObject>\"}]}
 

@@ -4,6 +4,8 @@
 #define GRID_MOVEEND      3
 #define GRID_MOVEPAGEUP   4
 #define GRID_MOVEPAGEDOWN 5
+#define GRID_WHEELUP      10
+#define GRID_WHEELDOWN    11
 
 #define CONFIG_BROWSE     1
 #define CONFIG_COLUMN     2
@@ -692,4 +694,3 @@
 	OF <oFWBrowse>;
 	=> ;
 		<oFWBrowse>:AddButton(<cTitle>,<xAction>,,<nOperation>,<nAccess>,.F.);;
-

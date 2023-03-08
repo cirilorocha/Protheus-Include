@@ -106,8 +106,7 @@
 					"    border-bottom-right-radius:0px; }"+;
 					"QComboBox::indicator { image: url(rpo:fwsst_cbx_arw_nml.png) }"+;
 					"QComboBox QListView{ color: #472929; "+;
-					"    border-width: 1px; border-style: flat; }"+;
-					"tLabel { color: #472929;}"
+					"    border-width: 1px; border-style: flat; }"
 
 #DEFINE FWSST_GET	"QLineEdit { color: #000000; selection-background-color: #CA5F5E;"+;
 					"    border-image: url(rpo:fwsst_get_nml.png) 3 3 3 3 stretch; "+;
@@ -118,8 +117,7 @@
 					"    border-width: 3px; padding: -1px; }"+;
 					"QLineEdit:disabled { color:#000000; "+;
 					"    border-image: url(rpo:fwsst_get_dld.png) 3 3 3 3 stretch; "+;
-					"    border-width: 3px; padding: -1px; }"+;
-					"tLabel { color: #472929;}"
+					"    border-width: 3px; padding: -1px; }"
 
 #DEFINE FWSST_RDO	"QRadioButton { background-repeat: repeat-x; "+;
 					"    background-repeat: repeat-y; "+;
@@ -235,8 +233,7 @@
 						"    border-top-width: 3px; "+;
 						"    border-left-width: 3px; "+;
 						"    border-right-width: 3px; "+;
-						"    border-bottom-width: 3px }"+;
-						"tLabel { color: #472929;}"
+						"    border-bottom-width: 3px }"
 
 #DEFINE FWSST_PRC	"QProgressBar { border-image: url(rpo:fwsst_mtr_bg.png) 2 2 2 2 round stretch; "+;
 					"    border-width: 2px; "+;
@@ -244,12 +241,8 @@
 					"    max-height:7px; }"+;
 					"QProgressBar::chunk { background-image: url(rpo:fwsst_mtr.png); }"
 
-#DEFINE FWSST_BRW	"QHeaderView::section { color: #361F1F; "+;
-					"    padding-left: 4px; height: 30px; "+;
-					"    background-image: url(rpo:fwsst_brw_hdr.png); border: 1px solid #CA5F5E; }"+;
-					"QTableView{ selection-background-color: #D12728; "+;
-					"    alternate-background-color: #FFEFDE; "+;
-					"    background: #FFFFFF; color: #361F1F; border: 1px solid #A0A0A0; }"
+#DEFINE FWSST_BRW	"QHeaderView::section { color: #361F1F; background-image: url(rpo:fwsst_brw_hdr.png); border: 1px solid #CA5F5E; }"+;
+       		    "QTableView{ selection-background-color: #D12728; alternate-background-color: #FFEFDE; background: #FFFFFF; color: #000000; border: 1px solid #9E9E9E; }"
 
 #DEFINE FWSST_SPN	"QSpinBox { border: 1px solid #DFDFDF;  }"+;
 					"QSpinBox::up-button { padding-top: -2px; "+;

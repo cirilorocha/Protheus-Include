@@ -19,4 +19,3 @@
 #  include "dwtable.ch"
 #  include "dwacts.ch"
 #endif
-

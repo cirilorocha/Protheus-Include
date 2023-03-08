@@ -1,0 +1,9 @@
+@annotation totvsFrameworkTReportsIntegratedProvider
+    active as logical
+@end
+
+#define IS_ACTIVE_TREPORTS_BUSINESS_OBJECT "active"
+#define TREPORTS_BUSINESS_OBJECT_ANNOTATION_NAME "totvsFrameworkTReportsIntegratedProvider"
+
+#define KEYVALUE 1
+#define LOOKUP 2

@@ -14,7 +14,7 @@
 #Define FF_CTRL_INIT_LEFT 				010 // Pixel inicial a esquerda
 #Define FF_CTRL_SEP_LINE 					014 // Distancia em pixels entre cada controle verticalmente
 #Define FF_CTRL_SEP_LEFT 					020 // Distancia em pixels entre cada controle horizontalmente
-#Define FF_CTRL_HEIGHT_DESCR_TOP	038 // Altura da linha quando descrição acima 
+#Define FF_CTRL_HEIGHT_DESCR_TOP	050 // Altura da linha quando descrição acima 
 #Define FF_CTRL_HEIGHT_DESCR_LEFT	022 // Altura da linha quando descrição a esquerda 
 #Define FF_DESCR_HEIGHT						018 // Altura da descrição
 #Define FF_HEADER_HEIGHT 					011 // Altura do Header no FWEditPanel 
@@ -23,8 +23,8 @@
 #Define FF_BUTTON_HEIGHT					011 // Altura do botão de Imagem/Memo (lX3Memo da MSMGet)
 #Define FF_CHECK_WIDTH						022 // Largura do quandrado do CheckBox
 #Define FF_CHECK_HEIGHT						014 // Altura padrão do campo Check
-#Define FF_MSGET_HEIGHT						009 // Altura padrão do MSGET
-#Define FF_COMBO_BUTTON_WIDTH			008 // Largura do botão da ComboBox
+#Define FF_MSGET_HEIGHT						012 // Altura padrão do MSGET
+#Define FF_COMBO_BUTTON_WIDTH			025 // Largura do botão da ComboBox
 #Define FF_COMBO_BUTTON_HEIGHT			015 // Largura do botão da ComboBox
 #Define FF_CTRL_WIDTH_MINIMAL			032 // Largura minima do controle
 
@@ -58,7 +58,7 @@
 
 
 // Disposicao dos campos
-#Define FF_PARAM_ITEMS_COUNT			029
+#Define FF_PARAM_ITEMS_COUNT			030
 #Define FF_PARAM_ORDER					001
 #Define FF_PARAM_CTRL_TYPE				002
 #Define FF_PARAM_FIELD					003
@@ -88,6 +88,7 @@
 #Define FF_PARAM_LINESCTRL				027
 #Define FF_PARAM_CTRLWIDTH				028
 #Define FF_PARAM_VIRTUAL 				029
+#Define FF_PARAM_OBFUSCATED 			030
 
 // *******************************************************************************************
 // [OBSOLETO, separador de grupo sera uma linha]
@@ -107,4 +108,3 @@
 // #Define FW_MEMO_HEIGHT             050 // Altura do campo Memo (OBSOLETO)
 // #Define FW_IMAGE_HEIGHT            080 // Altura do campo imagem: 070 (OBSOLETO)
 // *******************************************************************************************
-

@@ -1,0 +1,13 @@
+/*
+	Header : tlpp-core.th
+	Copyright (c) 2019, TOTVS SA
+	All rights reserved.
+*/
+
+#ifndef TLPP_CORE_TH
+#define TLPP_CORE_TH
+
+#include "tlpp-object.th"
+#include "tlpp-rest.th"
+
+#endif /* TLPP_CORE_TH */

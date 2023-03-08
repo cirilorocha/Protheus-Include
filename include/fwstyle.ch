@@ -658,4 +658,3 @@
 							"QPushButton:focus { 	border-style: solid } "+;
 							"QPushButton:focus {	border-image: url(rpo:fwlightsplit.png) 3 3 3 3 stretch }"+;		
 							"QPushButton:focus {	border-width: 3px }"
-

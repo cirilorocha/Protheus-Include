@@ -76,4 +76,3 @@
 #define DMPAPER_FANFOLD_LGL_GERMAN  41  // German Legal Fanfold 8 1/2 x 13 in
 
 #endif
-

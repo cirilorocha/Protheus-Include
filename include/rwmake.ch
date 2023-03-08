@@ -30,7 +30,6 @@
 
 #Translate PROW( => _PROW(
 #Translate PCOL( => _PCOL(
-#TransLate DEVPOS( => _DEVPOS(
 
 #Translate PLAYWAVE( => SndPlaySound(
 
@@ -85,4 +84,3 @@
 #xtranslate OSEND <o>() METHOD <m> PARAM <param> => PT_oSend( <(o)>+"()",<m>, ,<param> )
 
 #endif
-

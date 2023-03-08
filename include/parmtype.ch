@@ -1,33 +1,35 @@
+#Include "parmtypech.ch"
+
 #xcommand PARAMEXCEPTION [ PARAM <param> VAR ] <varname> TEXT <text> MESSAGE <message> ;
 	=> ;
 	UserException(<message>) 
 
 #xcommand PARAMEXCEPTION PARAM <param> VAR <varname> TEXT <text>  ;
 	=> ;
-	UserException("argument #"+<"param">+", parameter "+<"varname">+" error, expected "+<text>) 
+	UserException(PT_STR0001+<"param">+' '+PT_STR0002+' '+<"varname">+' '+PT_STR0003+' '+<text>) 
 
 #xcommand PARAMEXCEPTION <varname> TEXT <text>  ;
 	=> ;
-	UserException("argument error in parameter "+<"varname">+", expected "+<text>)
+	UserException(PT_STR0004+<"varname">+' '+PT_STR0005+' '+<text>)
 
 #xcommand CLASSEXCEPTION <varname> MESSAGE <message> ;
 	=> ;
-	UserException("error in parameter "+<"varname">+": "+<message>)
+	UserException(PT_STR0006+<"varname">+": "+<message>)
 
 #xcommand CLASSPARAMEXCEPTION [ PARAM <param> VAR ] <varname> TEXT <text,...> [ MESSAGE <message> ] ;
 	=> ;
 	[ UserException(<message>) ] ;;
-	[ UserException("argument #"+<"param">+", parameter "+<"varname">+" error, class expected "+\"<text>\") ] ;;
-	UserException("argument error in parameter "+<"varname">+", class expected "+\"<text>\")
+	[ UserException(PT_STR0001+<"param">+PT_STR0002+<"varname">+PT_STR0007+\"<text>\") ] ;;
+	UserException(PT_STR0004+<"varname">+PT_STR0008+\"<text>\")
 
 #xcommand BLOCKPARAMEXCEPTION [ PARAM <param> VAR ] <varname> TEXT <text> [ MESSAGE <message> ] ;
 	=> ;
 	[ UserException(<message>) ] ;;
-	[ UserException("argument #"+<"param">+" error , return expected "+<text>) ] ;;
-	UserException("argument error in block "+<"varname">+", return expected "+<text>)
+	[ UserException(PT_STR0001+<"param">+PT_STR0009+<text>) ] ;;
+	UserException(PT_STR0010+<"varname">+PT_STR0011+<text>)
 	
-#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT> ;
-	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT> ] ;
+#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT, JSON> ;
+	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT, JSON> ] ;
 	[ MESSAGE <message> ] ;
 	=> ;
 	If !(ValType(<varname>) $ Subs(<"type">,1,1) [ + Subs(<"typeN">,1,1) ]) ;;
@@ -35,8 +37,8 @@
 	EndIf ;;
 
 // Optional sem default 
-#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT> ;
-	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT> ] ;
+#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT, JSON> ;
+	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT, JSON> ] ;
 	[ MESSAGE <message> ] ;
 	<optional: OPTIONAL> ;
 	=> ;
@@ -45,8 +47,8 @@
 	EndIf ;;
 
 // Optional com default 
-#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT> ;
-	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT> ] ;
+#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT, JSON> ;
+	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT, JSON> ] ;
 	[ MESSAGE <message> ] ;
 	[<optional: OPTIONAL>];
 	DEFAULT <uVar> ;
@@ -57,7 +59,7 @@
 	EndIf ;;
 	<varname> := If(<varname> == nil,<uVar>,<varname>)
 
-#xcommand PARAMTYPE [ <param> VAR ] <varname> AS BLOCK EXPECTED <expected: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT> ;
+#xcommand PARAMTYPE [ <param> VAR ] <varname> AS BLOCK EXPECTED <expected: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, OBJECT, JSON> ;
 	[ MESSAGE <message> ] ;
 	[ <optional: OPTIONAL> ] ;
 	=> ;
@@ -87,8 +89,8 @@
 		PARAMEXCEPTION [ PARAM <param> VAR ] <varname> TEXT "O->"+ValType(<varname>) [ MESSAGE <message> ] ;;
 	EndIf
 
-#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL> ;
-	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL> ] ;
+#xcommand PARAMTYPE [ <param> VAR ] <varname> AS <type: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, JSON> ;
+	[ , <typeN: ARRAY, BLOCK, CHARACTER, DATE, NUMERIC, LOGICAL, JSON> ] ;
 	OR OBJECT CLASS <classname,...> ;
 	[ MESSAGE <message> ] ;
 	[ <optional: OPTIONAL> ] ;
@@ -98,4 +100,3 @@
 	Else ;;
 		PARAMTYPE [ <param> VAR ] <varname> AS <type> [, <typeN>] [ MESSAGE <message> ] [ <optional> ] ;;
 	EndIf
-

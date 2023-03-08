@@ -1,0 +1,64 @@
+
+#command SKIPTEST     => lForceSkip := .T.
+#command SKIPASSERT   => lForceSkip := .T.
+
+@annotation DiscoverySrc
+  folder          as char     default ""
+@end
+
+@annotation TestFixture
+  suite           as char     default "all"
+  owner           as char     default "unknown"
+  thread          as char     default "yes"
+  folder          as char     default ""
+  test            as char     default ""
+  description     as char     default ""
+  target          as char     default ""
+@end
+
+@annotation Test
+  description     as char     default ""
+@end
+
+@annotation Skip
+  description     as char     default ""
+@end
+
+@annotation OneTimeSetUp
+  description     as char     default ""
+@end
+
+@annotation OneTimeTearDown
+  description     as char     default ""
+@end
+
+@annotation SetUp
+  description     as char     default ""
+@end
+
+@annotation TearDown
+  description     as char     default ""
+@end
+
+@annotation ErrorLog
+  description     as char		default ""
+@end
+
+@annotation coverage
+  percent         as numeric 	default 0
+  type            as char     default ""
+  name_space      as char     default ""     // nao retirar "hifen", pois gera erro de compilação
+  source          as char     default ""
+@end
+
+#xcommand COVERAGE PERCENTAGE <V> SOURCE <S> TYPE <T>;
+  => ;
+      @Coverage( percent=<V>, type=<(T)>, name_space="", source=<(S)> ) ;;
+      function mark_<S>_coverage() ;;
+      return Nil
+
+#xcommand COVERAGE PERCENTAGE <V> NAMESPACE <N> SOURCE <S> TYPE <T>;
+  => ;
+      @Coverage( percent=<V>, type=<(T)>, name_space=<(N)>, source=<(S)> ) ;;
+      function mark_<S>_coverage() ;;
+      return Nil

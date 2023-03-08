@@ -1,0 +1,147 @@
+/*
+	Header : tlpp-probat.th
+	Copyright (c) 1997-2021, TOTVS SA
+	All rights reserved.
+*/
+
+#ifndef _TLPP_PROBAT_TH
+#define _TLPP_PROBAT_TH
+
+
+
+////////////
+// DISCOVERY
+////////////
+
+@annotation DiscoverySrc
+  folder          as char     default ""
+@end
+
+
+
+///////
+// TEST
+///////
+
+@annotation TestFixture
+  suite           as char     default "all"
+  owner           as char     default "unknown"
+  thread          as char     default "yes"
+  priority        as numeric  default 100
+  folder          as char     default ""
+  test            as char     default ""
+  description     as char     default ""
+  target          as char     default ""
+  runWithAll      as logical  default .T.        // Determina se Teste rodará com suite ALL (nome completo)
+  rwa             as logical  default .T.        // Determina se Teste rodará com suite ALL (sigla)
+@end
+
+@annotation Test
+  description     as char     default ""
+  target          as char     default ""
+@end
+
+@annotation OneTimeSetUp
+  description     as char     default ""
+@end
+
+@annotation OneTimeTearDown
+  description     as char     default ""
+@end
+
+@annotation SetUp
+  description     as char     default ""
+@end
+
+@annotation TearDown
+  description     as char     default ""
+@end
+
+@annotation ErrorLog
+  description     as char		default ""
+@end
+
+
+////////////
+// SKIP TEST
+////////////
+
+@annotation Skip
+  description       as char     default ""
+  tlppVersion       as char     default ""
+  appServerVersion  as char     default ""
+  appServerName     as char     default ""
+  system            as char     default ""
+@end
+
+#command SKIPTEST ;
+                    [ SYSTEM <os> ];
+                    [ TLPPVERSION <tlpp> ] ;
+                    [ APPSERVERVERSION <app_v> ] ;
+                    [ APPSERVERNAME <app_n> ] ;
+  => ;
+      [ if( valtype(<os>)<>"C", __soName := '', __soName := <(os)> ) ] ;;
+      [ if( valtype(<tlpp>)<>"C", __tlppVersion := '', __tlppVersion := <(tlpp)> ) ] ;;
+      [ if( valtype(<app_v>)<>"C", __appVersion := '', __appVersion := <(app_v)> ) ] ;;
+      [ if( valtype(<app_n>)<>"C", __appName := '', __appName := <(app_n)> ) ] ;;
+      lForceSkip := .T.
+
+#command  SKIPASSERT ;
+                    [ SYSTEM <os> ];
+                    [ TLPPVERSION <tlpp> ] ;
+                    [ APPSERVERVERSION <app_v> ] ;
+                    [ APPSERVERNAME <app_n> ] ;
+  => ;
+      __soName := '' ;;
+      __tlppVersion := '' ;;
+      __appVersion := '' ;;
+      __appName := '' ;;
+      [ if( valtype(<os>)<>"C", __soName := '', __soName := upper(<(os)>) ) ] ;;
+      [ if( valtype(<tlpp>)<>"C", __tlppVersion := '', __tlppVersion := <(tlpp)> ) ] ;;
+      [ if( valtype(<app_v>)<>"C", __appVersion := '', __appVersion := <(app_v)> ) ] ;;
+      [ if( valtype(<app_n>)<>"C", __appName := '', __appName := upper(<(app_n)>) ) ] ;;
+      lForceSkip := .T.
+
+
+
+////////
+// SUITE
+////////
+
+@annotation suiteConfig
+  mode_run        as char 	  default ""
+  suite_name      as char     default ""
+@end
+
+#xcommand SUITE <S> EXCLUSIVE;
+  => ;
+      @suiteConfig( mode_run="exclusive", suite_name=<(S)> ) ;;
+      function mark_<S>_suite_config() ;;
+      return Nil
+
+
+
+///////////
+// COVERAGE
+///////////
+
+@annotation coverage
+  percent         as numeric 	default 0
+  type            as char     default ""
+  name_space      as char     default ""     // nao retirar "hifen", pois gera erro de compilação
+  source          as char     default ""
+@end
+
+#xcommand COVERAGE PERCENTAGE <V> SOURCE <S> TYPE <T>;
+  => ;
+      @Coverage( percent=<V>, type=<(T)>, name_space="", source=<(S)> ) ;;
+      function mark_<S>_coverage() ;;
+      return Nil
+
+#xcommand COVERAGE PERCENTAGE <V> NAMESPACE <N> SOURCE <S> TYPE <T>;
+  => ;
+      @Coverage( percent=<V>, type=<(T)>, name_space=<(N)>, source=<(S)> ) ;;
+      function mark_<S>_coverage() ;;
+      return Nil
+
+#endif

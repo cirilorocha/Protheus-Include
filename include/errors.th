@@ -1,0 +1,43 @@
+
+// ----------------------------
+// Mensagens de erros genericas
+// ----------------------------
+#define _Error_Unknown_             'unknown error'
+#define _Error_NotExecute_          'not executed'
+#define _Error_ForceSkip_           'test was skipped because it was forced by command'
+#define _Error_InitializationObject 'could not initialize object'
+#define _Error_MethodAnnotation     'no methods with annotation test'
+#define _Error_ClassNoCompile       'class not compiled'
+#define _Error_AssertInvalidType    'data types are incompatible'
+#define _Error_AssertNoVector       'data type is not a vector'
+#define _Error_AssertIsNotNull      'value is not null'
+#define _Error_Main_Key_type        'duplicate type key'
+#define _Error_Main_Key_coverage    'duplicate coverage key'
+#define _Error_Main_Key_value       'invalid value for key'
+#define _Error_Main_Key_composition 'invalid key and value composition'
+#define _Error_Main_suites          'suites not set'
+#define _Error_Main_source          'invalid source name'
+#define _Error_Main_source_tlpp     'only tlpp fonts is valid'
+#define _Error_Main_type            'type not set'
+#define _Error_no_description       'the description for the test method has not been defined'
+#define _Error_freak_description    'the description for the test method contains freak words'
+#define _Error_sql_injection        'the string has suspected attack through SQL Injection'
+#define _Error_lorem_ipsum          'the text contains automatic generated excerpts from [Lorem ipsum]'
+#define _Error_Invalid_Character_	  'invalid character found'
+#define _Error_Characters_Repeated_	'the characters that form the word are repeated'
+#define _Error_Toleranc_SpecialChr_ 'exceeded tolarence for special characters in this phrase'
+#define _Error_Tolerac_Numeric_		  'exceeded tolerance for numeric in description string'
+#define _Error_Not_Phrase_			    'could not be counted as a phrase'
+#define _Error_ErrorLog_		        'Error Log Test'
+#define _Error_Not_ErrorLog_		    'the test did not generate an error.log as indicated by your annotation'
+
+
+
+// ------------------------------------------
+// Mensagens de erros usadas na Tabela Errors
+// ------------------------------------------
+#define _Error_000_                 'source validation'
+#define _Error_001_Code             'ER0001'
+#define _Error_001_                 'this source does not have any unit tests implemented'
+#define _Error_002_Code             'ER0002'
+#define _Error_002_                 'the code coverage for this source did not reach the required limit'

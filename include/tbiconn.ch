@@ -6,7 +6,7 @@
 */
 
 #ifndef _AP5MAIL_CH_
-	#include 'Ap5Mail.ch'
+	#include 'ap5mail.ch'
 #endif
 
 #ifndef _TBICONN_CH
@@ -88,4 +88,3 @@
 				EndIf															;;
 
 #endif
-

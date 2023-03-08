@@ -14,27 +14,11 @@
 #DEFINE XERROR_OPEN_ERROR     2
 #DEFINE XERROR_INVALID_XML    3
 
-#IFDEF SPANISH              
-	#DEFINE STR001 "Éxito"
-	#DEFINE STR002 "Error desconocido"
-	#DEFINE STR003 "Archivo no encontrado: "
-	#DEFINE STR004 "No fue posible abrir el archivo "
-	#DEFINE STR005 "Archivo XML invalido: "
-#ELSE
-	#IFDEF ENGLISH
-		#DEFINE STR001 "Success"
-		#DEFINE STR002 "Unknown error"
-		#DEFINE STR003 "File not found: "
-		#DEFINE STR004 "It wasn´t possible to open the file "
-		#DEFINE STR005 "Invalid XML file: "
-	#ELSE             
-		#DEFINE STR001 "Sucesso"
-		#DEFINE STR002 "Erro desconhecido"		
-		#DEFINE STR003 "Arquivo não encontrado: "	
-		#DEFINE STR004 "Não foi possível abrir o arquivo "
-		#DEFINE STR005 "Arquivo XML inválido: "		
-	#ENDIF
-#ENDIF
+#DEFINE STR001 XmlxFunCHStr():getXmlxFunStr0001()
+#DEFINE STR002 XmlxFunCHStr():getXmlxFunStr0002()
+#DEFINE STR003 XmlxFunCHStr():getXmlxFunStr0003()
+#DEFINE STR004 XmlxFunCHStr():getXmlxFunStr0004()
+#DEFINE STR005 XmlxFunCHStr():getXmlxFunStr0005()
 
 #xcommand CREATE <oXML> XMLSTRING <cString> [<lOnlyFirst:ONLYFIRSTNODE>] [ SETASARRAY <aArray,...> ] [OPTIONAL <aArray1,...> ];
             =>  ;
@@ -60,4 +44,3 @@
             XMLDltNode( <cNode>, @<oXML> )
 
 #endif
-

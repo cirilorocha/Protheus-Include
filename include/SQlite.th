@@ -1,0 +1,55 @@
+
+// ------------------
+// Tamanhos de Campos
+// ------------------
+#define     _dbTamCpo_binary            1
+#define     _dbTamCpo_codeExec          20
+#define     _dbTamCpo_codeRoutine       10
+#define     _dbTamCpo_codeResult        6
+#define     _dbTamCpo_codeSuite         3
+#define     _dbTamCpo_keyName           50
+#define     _dbTamCpo_keyID             50
+#define     _dbTamCpo_nameSuite         50
+#define     _dbTamCpo_timeMark          20
+#define     _dbTamCpo_results           8
+#define     _dbTamCpo_folder            100
+#define     _dbTamCpo_namespace         100
+#define     _dbTamCpo_source            100
+#define     _dbTamCpo_testName          100
+#define     _dbTamCpo_routine           255
+#define     _dbTamCpo_owner             15
+#define     _dbTamCpo_assertName        100
+#define     _dbTamCpo_assert            1024
+#define     _dbTamCpo_date              8
+#define     _dbTamCpo_time              8
+#define     _dbTamCpo_amountSources     10
+#define     _dbTamCpo_amountLines       20
+#define     _dbTamCpo_percentInt        10
+#define     _dbTamCpo_percentPrecision  6
+#define     _dbTamCpo_coverageLine      6
+#define     _dbTamCpo_coverage          10
+#define     _dbTamCpo_suite             6
+#define     _dbTamCpo_execution         9
+#define     _dbTamCpo_resultRoutine     3
+#define     _dbTamCpo_runCallStack      25
+#define     _dbTamCpo_runParams         255
+#define     _dbTamCpo_sequence          6
+#define     _dbTamCpo_memo              10
+
+
+
+// -------------------------
+// posicao aRoutines / aSRCs
+// -------------------------
+#define     _pos_Folder                 1
+#define     _pos_Namespace              2
+#define     _pos_Source                 3
+#define     _pos_Test                   4
+#define     _pos_Routine                5
+#define     _pos_Description            6
+#define     _pos_Owner                  7
+#define     _pos_Suites                 8
+#define     _pos_Type                   9
+#define     _pos_Thread                 10
+#define     _pos_MAX                    10
+#define     _pos_MAX_src                3

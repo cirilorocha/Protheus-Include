@@ -48,12 +48,8 @@
 // ##################################################################################
 
 #command user_dataset <identifier>;
-=> 	static _DATASET := nil;;
-	user function d_<identifier>();;
-		if ( _DATASET == nil );;
-			_DATASET := _d<identifier>():_d<identifier>(<"identifier">);;
-		endif;;
-	return _DATASET;;
+=> 	user function d_<identifier>();;
+	return _d<identifier>():_d<identifier>(<"identifier">);;
 	class _d<identifier> from BIRTDataSet;;
     	method _d<identifier>();;
    		method run();;
@@ -65,12 +61,8 @@
 
 	
 #command dataset <identifier>;
-=> 	static _DATASET := nil;;
-	function d_<identifier>();;
-		if ( _DATASET == nil );;
-			_DATASET := _d<identifier>():_d<identifier>(<"identifier">);;
-		endif;;
-	return _DATASET;;
+=> 	function d_<identifier>();;
+	return _d<identifier>():_d<identifier>(<"identifier">);;
 	class _d<identifier> from BIRTDataSet;;
     	method _d<identifier>();;
    		method run();;

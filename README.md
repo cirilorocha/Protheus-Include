@@ -1,7 +1,10 @@
 TOTVS - Microsiga Protheus Include (Header) Files
 =================================================
 
-Arquivos de cabeçalhos disponibilizados pela TOTVS em 5 de Junho de 2016.
+Arquivos de cabeçalhos disponibilizados pela TOTVS em 14 de Fevereiro de 2023.
+Arquivos do TlppCore versão 01.03.02
+
+Disponibilizado um executável que pode extrair diretamente os arquivos, sem precisar do Pyton RunTime, basta arrastar o arquivo .Ch ou .Th para o extrator que ele processa o arquivo. Também pode ser utilizado o arquivo .Bat que faz esse processamento em uma pasta inteira, basta deixar os dois arquivos (.Exe e .Bat) na mesma pasta, e rodar o batch passando como parâmetro o diretório onde estão os arquivos a serem processados.
 
 Geralmente estes são disponibilizados compactados via [deflate](https://en.wikipedia.org/wiki/DEFLATE) em um formato de específico.
 
@@ -15,21 +18,26 @@ A maneira que usei para descompactar os arquivos cabeçalhos foi através do seg
 
 decompress.py:
 
-    #!/usr/bin/python
+	#!/usr/bin/python
 
-    import zlib
-    import sys
+	import zlib
+	import sys
 
-    with open(sys.argv[1]) as f:
-        content = f.readlines()
-        
-    compressed = ''.join(content)
+	#with open(sys.argv[1],'rb') as f:
+	#    content = f.readlines()
+	#    
+	#compressed = ''.join(content)
+	compressed = open(sys.argv[1], 'rb').read()
 
-    decompress = zlib.decompressobj(-zlib.MAX_WBITS)
-    inflated = decompress.decompress(compressed[14:])
-    inflated += decompress.flush()
+	decompress = zlib.decompressobj(-zlib.MAX_WBITS)
+	inflated = decompress.decompress(compressed[14:])
+	inflated += decompress.flush()
 
-    print (inflated[:-1])
+	f = open(sys.argv[1]+'.txt', 'wb')
+	f.write(inflated[:-1])
+	f.close()
+
+	# print (inflated[:-1])
 
 Modo de uso:
 

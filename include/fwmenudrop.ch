@@ -46,7 +46,7 @@
 	'text-align: left;'+;
 	'font-weight: bold;'+;
 	'padding-left:10px;}'+;
-	'QPushButton:hover{background-color: #E3EAF2;}
+	'QPushButton:hover{background-color: #E3EAF2;}'
 
 #DEFINE FWDROPDOWN_CSS_ITEM_BUTTON  FWGetCSS("TButton",CSS_DROPDOWN_ITEM_BUTTON)
 
@@ -66,4 +66,3 @@
 #DEFINE IMG_HEADER_PADDING 2
 
 #DEFINE HEADER_BORDER_MARGIN 4
-

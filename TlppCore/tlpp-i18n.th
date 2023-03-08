@@ -1,0 +1,107 @@
+/*
+	Header : tlpp-i18n.th
+	Copyright (c) 2019, TOTVS SA
+	All rights reserved.
+*/
+
+#ifndef TLPP_I18N_TH
+#define TLPP_I18N_TH
+
+//TODO - limitado a fontes com extensão de tamanho 5 (.tlpp, por exemplo) ... melhorar ?!?!
+#xtranslate Localize(<n>[,<default,...>])  => tlpp.i18n.translationStr(Left(ProcSource(), Len(ProcSource()) - 5), <n>, <default>)
+
+#xcommand TOSTRING <NOMEVAR>#<cVAL,...> ;
+          => <NOMEVAR> := \'<cVAL>\'
+
+#xcommand TLPP BEGIN TRANSLATION  => Static Function LoadStr(cIdiom, cType)
+
+#xcommand TLPP END TRANSLATION    => Return
+
+#xcommand TRANSLATE <nCOD>#STR#<cIdiom>#<cVAL,...> ;
+          =>  If (cIdiom == \"<cIdiom>\" \.AND\. cType == \"STR\") \; ; 
+                If (<nCOD> \> len(a<cIdiom>)) \; ;
+                  aSize(a<cIdiom>, <nCOD>+1) \; ;
+                EndIf \; ;
+                a<cIdiom>\[<nCOD>\] := \'<cVAL>\' \; ;
+              EndIf
+
+#xcommand TRANSLATE <nCOD>#URI#<cIdiom>#<cVAL,...> ;
+          =>  If (cIdiom == \"<cIdiom>\" \.AND\. cType == \"URI\") \; ; 
+                If (<nCOD> \> len(aURI<cIdiom>)) \; ;
+                  aSize(aURI<cIdiom>, <nCOD>+1) \; ;
+                EndIf \; ;
+                aURI<cIdiom>\[<nCOD>\] := \'<cVAL>\' \; ;
+              EndIf
+
+#xcommand TRANSLATE <nCOD>#STR#ALL#<cVAL,...> ;
+          =>  If (cType == \"STR\") \; ; 
+                If (<nCOD> \> len(aALL)) \; ;
+                  aSize(aALL, <nCOD>+1) \; ;
+                EndIf \; ;
+                If (aALL\[<nCOD>\] == Nil) \; ;
+                  aALL\[<nCOD>\] := \'<cVAL>\' \; ;
+                EndIf \; ;
+              EndIf
+
+#xcommand TRANSLATE <nCOD>#URI#ALL#<cVAL,...> ;
+          =>  If (cType == \"URI\") \; ; 
+                If (<nCOD> \> len(aURIALL)) \; ;
+                  aSize(aURIALL, <nCOD>+1) \; ;
+                EndIf \; ;
+                If (aURIALL\[<nCOD>\] == Nil) \; ;
+                  aURIALL\[<nCOD>\] := \'<cVAL>\' \; ;
+                EndIf \; ;
+              EndIf
+
+#xcommand TLPP TRANSLATION <cIdiom> <SRC> ;
+          =>  Function <SRC>4<cIdiom>(cUID, nIndex) \; ;
+                Local cRet := \"\" \; ;
+                Local i \; ;
+                Static a<cIdiom> := \{\} \; ;
+                Static l<cIdiom> := \.F\. \; ;
+                If ( ! l<cIdiom> ) \; ;
+                  Static aALL := \{\} \; ;
+                  VarSetUID(cUID, \.T\.) \; ;
+                  VarSetXD(cUID, \"0\", \"0\") \; ;
+                  l<cIdiom> := \.T\. \; ;
+                  LoadStr(\"<cIdiom>\", \"STR\") \; ;
+                  For i := 1 to len(a<cIdiom>) \; ;
+                    if ( ValType(a<cIdiom>\[i\]) == 'C' .and. len(a<cIdiom>\[i\])>0 )\; ;
+                      VarSetXD(cUID, cValToChar(i), a<cIdiom>\[i\]) \; ;
+                    endif\; ;
+                  End \; ;
+                  For i := 1 to len(aALL) \; ;
+                    If ( (i > len(a<cIdiom>) \.OR\. (ValType(a<cIdiom>\[i\]) == 'U')) \.AND\. (ValType(aALL\[i\]) == 'C')) \; ;
+                      VarSetXD(cUID, cValToChar(i), aALL\[i\]) \; ; 
+                    EndIf \; ;  				   
+                  End \; ;
+                EndIf \; ;
+                VarGetXD(cUID, cValToChar(nIndex), @cRet) \; ;
+              Return cRet \; ;
+              ;
+              ;
+              ;
+              Function <SRC>4<cIdiom>URI(cUID, nIndex) \; ;
+                Local cRet := \"\" \; ;
+                Local i \; ;
+                Static aURI<cIdiom> := \{\} \; ;
+                Static lURI<cIdiom> := \.F\. \; ;
+                If ( ! lURI<cIdiom> ) \; ;
+                  Static aURIALL := \{\} \; ;
+                  VarSetUID(cUID, \.T\.) \; ;
+                  VarSetXD(cUID, \"0\", \"0\") \; ;
+                  l<cIdiom> := \.T\. \; ;
+                  LoadStr(\"<cIdiom>\", \"URI\") \; ;
+                  For i := 1 to len(aURI<cIdiom>) \; ;
+                    VarSetXD(cUID, cValToChar(i), IIF(ValType(aURI<cIdiom>\[i\]) == 'C', aURI<cIdiom>\[i\], \"\")) \; ;               
+                  End \; ;
+                  For i := 1 to len(aURIALL) \; ;
+                    If ( (i > len(aURI<cIdiom>) \.OR\. (ValType(aURI<cIdiom>\[i\]) == 'U')) \.AND\. (ValType(aURIALL\[i\]) == 'C')) \; ;
+                      VarSetXD(cUID, cValToChar(i), aURIALL\[i\]) \; ; 
+                    EndIf \; ;  				   
+                  End \; ;
+                EndIf \; ;
+                VarGetXD(cUID, cValToChar(nIndex), @cRet) \; ;
+              Return cRet
+
+#endif /* TLPP_I18N_TH */

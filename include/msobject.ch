@@ -27,9 +27,22 @@
 #xtranslate BYDEFAULT <V>, <Val>     => if( <V> == NIL, <Val>, <V> )
 
 #xcommand CLASS <ClsNam>   ;
-		[ <from: INHERIT FROM, INHERIT, FROM, OF> <SupCls> ];
+		[ <from: INHERIT FROM, INHERIT, FROM, OF> [<NSpace>.]<SupCls> ];
 		=> ;
-		_ObjNewClass( <ClsNam> , [<SupCls>] ) 
+		_ObjNewClass( <ClsNam> , [<NSpace>.][<SupCls>] ) 
+		
+
+#xcommand CLASS <ClsNam> CAMELCASE NAME <ClsSerial>;
+        [ <from: INHERIT FROM, INHERIT, FROM, OF> <SupCls> ];
+        => ;
+        _ObjNewClass( <ClsNam> , [<SupCls>] ) ;;
+        _ObjClassData( DESCRIPTION_SERIALIZE_<ClsNam>, string, , <ClsSerial> )
+
+#xcommand CLASS <ClsNam> CAMELCASE;
+        [ <from: INHERIT FROM, INHERIT, FROM, OF> <SupCls> ];
+        => ;
+        _ObjNewClass( <ClsNam> , [<SupCls>] ) ;;
+        _ObjClassData( DESCRIPTION_SERIALIZE_<ClsNam>, string, , \"<ClsNam>\" )
 
 #xtranslate CREATE CLASS <*ClsHead*> =>  CLASS <ClsHead>
 
@@ -62,7 +75,31 @@
 #xcommand DATA <uVar> [AS <Typ>] ;
 				[ <Scp: PUBLIC, EXPORT, READONLY, PROTECTED, LOCAL, HIDDEN> ] ;
 				[ <Dft: DEFAULT, INIT> <uData> ] ;
-				=> _ObjClassData( <uVar>, [<Typ>], [<Scp>], [<uData>] )
+				=> _ObjClassData( <uVar>, [<Typ>], , [<uData>] )
+
+#xcommand PUBLIC DATA <uVar> [AS <Typ>] ;
+[ <Dft: DEFAULT, INIT> <uData> ] ;
+=> _ObjClassData( <uVar>, [<Typ>], "PUBLIC", [<uData>] )
+
+#xcommand PRIVATE DATA <uVar> [AS <Typ>] ;
+[ <Dft: DEFAULT, INIT> <uData> ] ;
+=> _ObjClassData( <uVar>, [<Typ>], "PRIVATE", [<uData>] )
+	
+#xcommand PROTECTED DATA <uVar> [AS <Typ>] ;
+[ <Dft: DEFAULT, INIT> <uData> ] ;
+=> _ObjClassData( <uVar>, [<Typ>], "PROTECTED", [<uData>] )
+	
+#xcommand CAMELCASE DATA <uVar> [AS <Typ>] ;
+        [ <Scp: PUBLIC, EXPORT, READONLY, PROTECTED, LOCAL, HIDDEN> ] ;
+        [ <Dft: DEFAULT, INIT> <uData> ] ;
+        => _ObjClassData( <uVar>, [<Typ>], [<Scp>], [<uData>] ) ;;
+        _ObjClassData( DESCRIPTION_SERIALIZE_<uVar>, string, , \"<uVar>\" )
+
+#xcommand CAMELCASE DATA <uVar> [AS ARRAY OF <Typ>] ;
+        [ <Scp: PUBLIC, EXPORT, READONLY, PROTECTED, LOCAL, HIDDEN> ] ;
+        [ <Dft: DEFAULT, INIT> <uData> ] ;
+        => _ObjClassData( <uVar>, [arrayof_<Typ>], [<Scp>], [<uData>] ) ;;
+        _ObjClassData( DESCRIPTION_SERIALIZE_<uVar>, string, , \"<uVar>\" )
 
 #xcommand CLASSVAR <uVar> [AS <Typ>] ;
 				[ <Scp: PUBLIC, EXPORT, READONLY, PROTECTED, LOCAL, HIDDEN> ] ;
@@ -166,22 +203,29 @@
 
 #xtranslate :Parent( <SupCls> ):<*M*> => :<SupCls>:<M>
 
-#xtranslate :Parent:<*M*>             => :_sUPcLS_:<M>
-
-#xtranslate Super:<*M*>               => Self:_sUPcLS_:<M>
-
 #xtranslate :Super  => :Parent
 
 #xtranslate ::      =>    Self:
 
 #xcommand METHOD <Met> [ <scp: PUBLIC, EXPORT, LOCAL, HIDDEN> ][ <ctor: CONSTRUCTOR> ][ VIRTUAL ] => ;
-		_ObjClassMethod(_AsName_( <Met> ),_AsParms_([<Met>]), [<scp>])
+		_ObjClassMethod(_AsName_( <Met> ),_AsParms_([<Met>]), )
+		
+#xcommand PRIVATE METHOD <Met> [ <ctor: CONSTRUCTOR> ][ VIRTUAL ] => ;
+		_ObjClassMethod(_AsName_( <Met> ),_AsParms_([<Met>]), PRIVATE)
+		
+#xcommand PUBLIC METHOD <Met> [ <ctor: CONSTRUCTOR> ][ VIRTUAL ] => ;
+		_ObjClassMethod(_AsName_( <Met> ),_AsParms_([<Met>]), PUBLIC)
+		
+#xcommand PROTECTED METHOD <Met> [ <ctor: CONSTRUCTOR> ][ VIRTUAL ] => ;
+		_ObjClassMethod(_AsName_( <Met> ),_AsParms_([<Met>]), PROTECTED)
 
+#xcommand STATIC METHOD <Met> [ <ctor: CONSTRUCTOR> ][ VIRTUAL ] => ;
+		_ObjClassMethod(_AsName_( <Met> ),_AsParms_([<Met>]), STATIC)
+		
 #xtranslate METHOD <Met> CLASS <clas> [ VIRTUAL ]=> ;
 		Function ___<clas>_AsMet_(<Met>)
 		
 #xtranslate _AsMet_( <itm>( [<prm,...>] ) )  => ____<itm>( [<prm>] )
 
 #endif
-
 

@@ -31,4 +31,3 @@
 #define oleWdFormatHTML 			       "102"
 
 #endif
-

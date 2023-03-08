@@ -8,11 +8,12 @@
 #define _RESTFUL_CH_
 
 #XTRANSLATE _WSParms_( [<prm,...>] )    =>  [(<prm>)] 	
+#XTRANSLATE REST_NO_TENANT_STRING => ,"notenant": true
 
-#XCOMMAND WSRESTFUL <ClsNam> DESCRIPTION <ClsDoc> [ SECURITY <cResource> ] [ FORMAT <ClsFormat> ] ;
+#XCOMMAND WSRESTFUL <ClsNam> DESCRIPTION <ClsDoc> [ SECURITY <cResource> ] [ <consume: CONSUMES,FORMAT> <ClsFormat> ] ;
 		=> ;
 		_ObjNewClass( REST_<ClsNam> , WSRESTFUL )	;;
-		_ObjClassData( DESCRIPTION__ , string, , <ClsDoc> ) ;;
+		_ObjClassData( DESCRIPTION__ , string, , <(ClsDoc)> ) ;;
 		_ObjClassData( DESCRIPTION_FORMAT , string , , <ClsFormat>) ;;
 		_ObjClassData( DESCRIPTION_SECURITY , string , , <cResource> ) ;;
 		_ObjClassData( DESCRIPTION_SSL , string, , ".F." )
@@ -20,7 +21,7 @@
 #XCOMMAND WSRESTFUL <ClsNam> DESCRIPTION <ClsDoc> [ SECURITY <cResource> ] [ FORMAT <ClsFormat> ] SSL ONLY ;
 		=> ;
 		_ObjNewClass( REST_<ClsNam> , WSRESTFUL )	;;
-		_ObjClassData( DESCRIPTION__ , string, , <ClsDoc> ) ;;
+		_ObjClassData( DESCRIPTION__ , string, , <(ClsDoc)> ) ;;
 		_ObjClassData( DESCRIPTION_FORMAT , string , , <ClsFormat>) ;;
 		_ObjClassData( DESCRIPTION_SECURITY , string , , <cResource> ) ;;
 		_ObjClassData( DESCRIPTION_SSL , string, , ".T." )
@@ -31,61 +32,190 @@
 #XCOMMAND END WSRESTFUL	=>	ENDWSRESTFUL ;
 
 
-#XCOMMAND WSMETHOD GET DESCRIPTION <MthDoc> WSSYNTAX <MthWSSyntax>	;
+#XCOMMAND WSMETHOD GET DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+		[ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
         =>  ;
         _ObjClassMethod( GET, _WSParms_(), ) ;;
-	_ObjClassData( DESCRIPTION_GET , string, , <MthDoc> ) ;;
-	_ObjClassData( DESCRIPTION_SYNTAX_GET, string, , <MthWSSyntax> )
+		_ObjClassData( DESCRIPTION_GET , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_GET, string, , <MthWSSyntax> ) ;;
+		_ObjClassData( DESCRIPTION_INFO_GET, string, , \'{"id":"get","name":"GET";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			[REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
 
-#XCOMMAND WSMETHOD PUT DESCRIPTION <MthDoc> WSSYNTAX <MthWSSyntax>	;
+#XCOMMAND WSMETHOD GET <MthId> DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+		[ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
         =>  ;
-        _ObjClassMethod( PUT, _WSParms_(), ) ;;
-	_ObjClassData( DESCRIPTION_PUT , string, , <MthDoc> ) ;;
-	_ObjClassData( DESCRIPTION_SYNTAX_PUT, string, , <MthWSSyntax> )
+        _ObjClassMethod( GET_<MthId>, _WSParms_(), ) ;;
+		_ObjClassData( DESCRIPTION_GET_<MthId> , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_GET_<MthId>, string, , <MthWSSyntax> ) ;;
+		_ObjClassData( DESCRIPTION_INFO_GET_<MthId>, string, , \'{"id":\"<MthId>\","name":"GET";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			 [REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
 
-#XCOMMAND WSMETHOD POST DESCRIPTION <MthDoc> WSSYNTAX <MthWSSyntax>	;
+#XCOMMAND WSMETHOD PUT DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+        [ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
+		=>  ;
+        _ObjClassMethod( PUT, _WSParms_(), ) ;;
+		_ObjClassData( DESCRIPTION_PUT , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_PUT, string, , <MthWSSyntax> ) ;;
+		_ObjClassData( DESCRIPTION_INFO_PUT, string, , \'{"id":"update","name":"PUT";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			[REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
+
+#XCOMMAND WSMETHOD PUT <MthId> DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+		[ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
+        =>  ;
+        _ObjClassMethod( PUT_<MthId>, _WSParms_(), ) ;;
+		_ObjClassData( DESCRIPTION_PUT_<MthId> , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_PUT_<MthId>, string, , <MthWSSyntax> ) ;;
+		_ObjClassData( DESCRIPTION_INFO_PUT_<MthId>, string, , \'{"id":\"<MthId>\","name":"PUT";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			[REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
+
+#XCOMMAND WSMETHOD POST DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+		[ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
         =>  ;
         _ObjClassMethod( POST, _WSParms_(), ) ;;
-	_ObjClassData( DESCRIPTION_POST , string, , <MthDoc> ) ;;
-	_ObjClassData( DESCRIPTION_SYNTAX_POST, string, , <MthWSSyntax> )
-                                       
-#XCOMMAND WSMETHOD DELETE DESCRIPTION <MthDoc> WSSYNTAX <MthWSSyntax>	;
+		_ObjClassData( DESCRIPTION_POST , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_POST, string, , [<MthWSSyntax>] ) ;;
+		_ObjClassData( DESCRIPTION_INFO_POST, string, , \'{"id":"create","name":"POST";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			[REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
+
+#XCOMMAND WSMETHOD POST <MthId> DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+		[ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
+        =>  ;
+        _ObjClassMethod( POST_<MthId>, _WSParms_(), ) ;;
+		_ObjClassData( DESCRIPTION_POST_<MthId> , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_POST_<MthId>, string, , [<MthWSSyntax>] ) ;;
+		_ObjClassData( DESCRIPTION_INFO_POST_<MthId>, string, , \'{"id":\"<MthId>\","name":"POST";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			[REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
+
+#XCOMMAND WSMETHOD DELETE DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+		[ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
         =>  ;
         _ObjClassMethod( DELETE, _WSParms_(), ) ;;
-	_ObjClassData( DESCRIPTION_DELETE , string, , <MthDoc> ) ;;
-	_ObjClassData( DESCRIPTION_SYNTAX_DELETE, string, , <MthWSSyntax> )
+		_ObjClassData( DESCRIPTION_DELETE , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_DELETE, string, , <MthWSSyntax> ) ;;
+		_ObjClassData( DESCRIPTION_INFO_DELETE, string, , \'{"id":"delete","name":"DELETE";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			[REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
 
-#XTRANSLATE WSMETHOD GET WSSERVICE <clas> ;
-		=>	;
-		Function ___REST_<clas>____GET()
+#XCOMMAND WSMETHOD DELETE <MthId> DESCRIPTION <MthDoc> [ WSSYNTAX <MthWSSyntax> ] [ PATH <MthPath>]	;
+		[ CONSUMES <MthConsumes> ] [ PRODUCES <MthProduces> ] ;
+		[ REQUEST <MthRequest> ] [ RESPONSE <MthResponse> ] ;
+		[ TTALK <MthTTalk> ] ;
+		[ <REST_NO_TENANT_STRING: NOTENANT> ] ;
+        =>  ;
+        _ObjClassMethod( DELETE_<MthId>, _WSParms_(), ) ;;
+		_ObjClassData( DESCRIPTION_DELETE_<MthId> , string, , <(MthDoc)> ) ;;
+		_ObjClassData( DESCRIPTION_SYNTAX_DELETE_<MthId>, string, , <MthWSSyntax> ) ;;
+		_ObjClassData( DESCRIPTION_INFO_DELETE_<MthId>, string, , \'{"id":\"<MthId>\","name":"DELETE";
+			[,"path":<MthPath>];
+			[,"ttalk":<MthTTalk>];
+			[REST_NO_TENANT_STRING];
+			[,"consumes":<MthConsumes>];
+			[,"produces":<MthProduces>];
+			[,"request":\"<MthRequest>\"];
+			[,"response":\"<MthResponse>\"]}\' )
 
-#XTRANSLATE WSMETHOD GET WSRECEIVE <_p1_Par,...> WSSERVICE <clas> ;
-		=>	;
-		Function ___REST_<clas>____GET(<_p1_Par>, WSNOSEND)
 
-#XTRANSLATE WSMETHOD PUT WSSERVICE <clas> ;
+#XTRANSLATE WSMETHOD GET [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
 		=>	;
-		Function ___REST_<clas>____PUT()
+		Function ___REST_<clas>____GET(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
 
-#XTRANSLATE WSMETHOD PUT WSRECEIVE <_p1_Par,...> WSSERVICE <clas> ;
+#XTRANSLATE WSMETHOD GET <id> [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
 		=>	;
-		Function ___REST_<clas>____PUT(<_p1_Par>, WSNOSEND)
+		Function ___REST_<clas>____GET_<id>(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
 
-#XTRANSLATE WSMETHOD POST WSSERVICE <clas> ;
+#XTRANSLATE WSMETHOD PUT [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
 		=>	;
-		Function ___REST_<clas>____POST()
+		Function ___REST_<clas>____PUT(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
 
-#XTRANSLATE WSMETHOD POST WSRECEIVE <_p1_Par,...> WSSERVICE <clas> ;
+#XTRANSLATE WSMETHOD PUT <id> [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
 		=>	;
-		Function ___REST_<clas>____POST(<_p1_Par>, WSNOSEND)
+		Function ___REST_<clas>____PUT_<id>(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
 
-#XTRANSLATE WSMETHOD DELETE WSSERVICE <clas> ;
+#XTRANSLATE WSMETHOD POST [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
 		=>	;
-		Function ___REST_<clas>____DELETE()
+		Function ___REST_<clas>____POST(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
 
-#XTRANSLATE WSMETHOD DELETE WSRECEIVE <_p1_Par,...> WSSERVICE <clas> ;
+#XTRANSLATE WSMETHOD POST <id> [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
 		=>	;
-		Function ___REST_<clas>____DELETE(<_p1_Par>, WSNOSEND)
+		Function ___REST_<clas>____POST_<id>(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
+
+#XTRANSLATE WSMETHOD DELETE [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
+		=>	;
+		Function ___REST_<clas>____DELETE(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
+
+#XTRANSLATE WSMETHOD DELETE <id> [ <query: QUERYPARAM,WSRECEIVE> <_p1_Par,...> ] ;
+		[ PATHPARAM <_p2_Par,...> ] [ HEADERPARAM <_p3_Par,...> ] <service: WSSERVICE, WSRESTFUL, WSREST> <clas> ;
+		=>	;
+		Function ___REST_<clas>____DELETE_<id>(_QUERYPARAM[,<_p1_Par>][,_PATHPARAM,<_p2_Par>][,_HEADERPARAM,<_p3_Par>],WSNOSEND)
 
 
 #XCOMMAND WSDATA <uVar> [AS <Typ>] ;
@@ -142,4 +272,4 @@
 #DEFINE	APPLICATION_XJAVASCRIPT          "application/x-javascript"
 #DEFINE APPLICATION_JAVASCRIPT           "application/javascript"
 #DEFINE TEXT_JAVASCRIPT                  "text/javascript"
-#endif
+#ENDIF

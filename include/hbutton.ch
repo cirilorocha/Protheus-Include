@@ -102,4 +102,3 @@
   [ <oSpt> := ] tSplitter():New( <nRow>, <nCol>, <oWnd>, <nWidth>, <nHeight>, <nOrient> )
 
 #endif
-

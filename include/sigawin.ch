@@ -52,7 +52,7 @@
 
 #Translate PROW( => _PROW(
 #Translate PCOL( => _PCOL(
-#TransLate DEVPOS( => _DEVPOS(
+
 
 
 #xcommand @ <nRow>, <nCol> BUTTON [<oBtn>] RESOURCE [ <cResName1> [,<cResName2>] ] ;
@@ -155,7 +155,7 @@
 				 <.lCenter.>, <.lRight.>,;
 				 [\{|nKey, nFlags, Self| <uChange>\}], <.readonly.> ,<(uVar)>)
 
-#command @ <nRow>, <nCol> MSGET [ <oGet> VAR ] <uVar> ;
+#command @ <nRow>, <nCol> MSGET <uVar> ;
 				[ <dlg: OF, WINDOW, DIALOG> <oWnd> ] ;
 				[ PICTURE <cPict> ] ;
 				[ VALID <ValidFunc> ] ;
@@ -178,7 +178,7 @@
 				[ <help:HELPID, HELP ID> <nHelpId> ] ;
 				[ <lHasButton: HASBUTTON> ] ;
 		 => ;
-			 [ <oGet> := ] TGet():New( <nRow>, <nCol>, bSETGET(<uVar>),;
+			 	TGet():New( <nRow>, <nCol>, bSETGET(<uVar>),;
 				 [<oWnd>], <nWidth>, <nHeight>, <cPict>, <{ValidFunc}>,;
 				 <nClrFore>, <nClrBack>, <oFont>, <.design.>,;
 				 <oCursor>, <.pixel.>, <cMsg>, <.update.>, <{uWhen}>,;
@@ -186,6 +186,42 @@
 				 [\{|nKey, nFlags, Self| <uChange>\}], <.readonly.>,;
 				 <.pass.> ,<cAlias>,<(uVar)>,,[<.lNoBorder.>], [<nHelpId>], [<.lHasButton.>] )
 
+ #command @ <nRow>, <nCol> MSGET  <oGet> VAR <uVar> ;
+				[ <dlg: OF, WINDOW, DIALOG> <oWnd> ] ;
+				[ PICTURE <cPict> ] ;
+				[ VALID <ValidFunc> ] ;
+				[ <color:COLOR,COLORS> <nClrFore> [,<nClrBack>] ] ;
+				[ SIZE <nWidth>, <nHeight> ]	;
+				[ FONT <oFont> ] ;
+				[ <design: DESIGN> ] ;
+				[ CURSOR <oCursor> ] ;
+				[ <pixel: PIXEL> ] ;
+				[ MESSAGE <cMsg> ] ;
+				[ <update: UPDATE> ] ;
+				[ WHEN <uWhen> ] ;
+				[ <lCenter: CENTER, CENTERED> ] ;
+				[ <lRight: RIGHT> ] ;
+				[ ON CHANGE <uChange> ] ;
+				[ <readonly: READONLY, NO MODIFY> ] ;
+				[ <pass: PASSWORD> ] ;
+				[ <lF3: F3> <cAlias> ];
+				[ <lNoBorder: NO BORDER, NOBORDER> ] ;
+				[ <help:HELPID, HELP ID> <nHelpId> ] ;
+				[ <lHasButton: HASBUTTON> ] ;
+				[ <OBFUSCATED> <lOBFUSCATED> ] ;
+				[ <lAcessibility:ACESSIBILITY> DESCRIPTION <cDescription> TYPE <cType> [<lRequired:REQUIRED>]] ;
+		 => ;
+			 <oGet> := TGet():New( <nRow>, <nCol>, bSETGET(<uVar>),;
+				 [<oWnd>], <nWidth>, <nHeight>, <cPict>, <{ValidFunc}>,;
+				 <nClrFore>, <nClrBack>, <oFont>, <.design.>,;
+				 <oCursor>, <.pixel.>, <cMsg>, <.update.>, <{uWhen}>,;
+				 <.lCenter.>, <.lRight.>,;
+				 [\{|nKey, nFlags, Self| <uChange>\}], <.readonly.>,;
+				 <.pass.> ,<cAlias>,<(uVar)>,,[<.lNoBorder.>], [<nHelpId>], [<.lHasButton.>] );
+				[;If (<lOBFUSCATED> .and. FindFunction('FwPDCanUSe') .and. FWPdCanUse(.T.),<oGet>:lObfuscate := .T.,)];
+				[;If (<.lAcessibility.> .and. FWHasAccMode(ACC_VISUAL),<oGet>:bGotFocus := {|| AVSpeak(AVField2Speak(<.lRequired.>,<cType>,<cDescription>,Len(<uVar>),<uVar>,;
+					<.lF3.>))},)]
+			
 #xcommand REDEFINE MSGET [ <oGet> VAR ] <uVar> ;
 				 [ ID <nId> ] ;
 				 [ <dlg: OF, WINDOW, DIALOG> <oDlg> ] ;
@@ -549,7 +585,7 @@
 #Translate GetDados => MsGetDados():New
 #Translate InKey( => _inKey(
 
-#include "StdWin.ch"
+#include "stdwin.ch"
 
 #define SIGA
 

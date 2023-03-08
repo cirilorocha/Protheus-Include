@@ -52,7 +52,7 @@ Constantes de uso genérico
 #define MAX_REG_POR_PAGINA        12
 #define VAZIO        			  "{VAZIO}"
 // Inclui o arquivo de tradução do próprio
-#INCLUDE "DWTConst.ch"
+#INCLUDE "dwtconst.ch"
 
 /*
 -----------------------------------------------------------------------------------------
@@ -907,4 +907,3 @@ Identificadores de parametros get/post de uso comum
 #define BUILD_SITE		"WS"
 
 #endif
-

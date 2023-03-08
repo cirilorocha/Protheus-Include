@@ -15,7 +15,7 @@
 #DEFINE CODB 
 #DEFINE WCODB 
 
-#include 'PrConst.ch' 
+#include 'prconst.ch' 
 #include 'sigawin.ch'
 #include 'protheus.ch'
 

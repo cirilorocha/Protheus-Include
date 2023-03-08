@@ -15,7 +15,7 @@
 #DEFINE XCDX
 #DEFINE CDX
 
-#include "PrConst.ch" 
+#include "prconst.ch" 
 #include "sigawin.ch" 
 
 #endif

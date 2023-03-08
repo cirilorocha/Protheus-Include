@@ -1,4 +1,4 @@
-#INCLUDE "FWBROWSE.CH"
+#INCLUDE "fwbrowse.ch"
 
 #xcommand DEFINE FWMBROWSE <oFWBrowse> ;
 	[ ALIAS <cAlias> ] ;

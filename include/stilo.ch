@@ -110,4 +110,3 @@
 							"QRadioButton::indicator { 	image: url(rpo:x.png)}"+;
 							"QWidget {				 	image: url(rpo:x.png)}"														
 											
-

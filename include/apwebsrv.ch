@@ -32,23 +32,23 @@
 #xcommand WSSERVICE <ClsNam> DESCRIPTION <ClsDoc> ;
 		=> ;
 		_ObjNewClass( <ClsNam> , WSSERVICE )	;;
-		_ObjClassData( DESCRIPTION_<ClsNam> , string, , <ClsDoc> )
+		_ObjClassData( DESCRIPTION_<ClsNam> , string, , <(ClsDoc)> )
 
 #xcommand WSSERVICE <ClsNam> RUNTIME DESCRIPTION <ClsDoc> ;
 		=> ;
 		_ObjNewClass( <ClsNam> , WSSERVICE )	;;
-		_ObjClassData( DESCRIPTION_<ClsNam> , macro, , \'<ClsDoc>\' ) ;; 
+		_ObjClassData( DESCRIPTION_<ClsNam> , macro, , \'<(ClsDoc)>\' ) ;; 
 
 #xcommand WSSERVICE <ClsNam> DESCRIPTION <ClsDoc> NAMESPACE <ClsNameSpace>;
 		=> ;
 		_ObjNewClass( <ClsNam> , WSSERVICE )	;;
-		_ObjClassData( DESCRIPTION_<ClsNam> , string, , <ClsDoc> ) ;; 
+		_ObjClassData( DESCRIPTION_<ClsNam> , string, , <(ClsDoc)> ) ;; 
 		_ObjClassData( DESCRIPTION__NAMESPACE_<ClsNam> , string, , <ClsNameSpace> )
 
 #xcommand WSSERVICE <ClsNam> RUNTIME DESCRIPTION <ClsDoc> NAMESPACE <ClsNameSpace>;
 		=> ;
 		_ObjNewClass( <ClsNam> , WSSERVICE )	;;
-		_ObjClassData( DESCRIPTION_<ClsNam> , macro, , \'<ClsDoc>\' ) ;; 
+		_ObjClassData( DESCRIPTION_<ClsNam> , macro, , \'<(ClsDoc)>\' ) ;; 
 		_ObjClassData( DESCRIPTION__NAMESPACE_<ClsNam> , string, , <ClsNameSpace> )
 
 #xcommand WSSERVICE <ClsNam> NAMESPACE <ClsNameSpace>;
@@ -77,7 +77,7 @@
 #xcommand WSMETHOD <_p_Name> DESCRIPTION <MthDoc> 	;
         =>  ;
         _ObjClassMethod( <_p_Name>, _WSParms_(), ) ;;
-		_ObjClassData( DESCRIPTION_<_p_Name> , string, , <MthDoc> )		
+		_ObjClassData( DESCRIPTION_<_p_Name> , string, , <(MthDoc)> )		
 
 #xcommand WSMETHOD <_p_Name> WSVALID <_valid_name_> ;
         =>  ;
@@ -128,4 +128,3 @@
 #xtranslate END WSMETHOD => RECOVER ; WsMethodEnd(.T.) ; Return .F. ; END SEQUENCE ; WsMethodEnd(.F.)
 
 #endif
-

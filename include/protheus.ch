@@ -18,33 +18,34 @@
 #xtranslate Web Function <cNome> => Function W_<cNome>
 #xtranslate HTML Function <cNome> => Function H_<cNome>
 #xtranslate USER Function <cNome> => Function U_<cNome>
+#xtranslate USER Function <cNome>[params] => Function U_<cNome><params>
 #xtranslate WebUSER Function <cNome> => Function B_<cNome>
 
 #xcommand STACKVAR <uVar1> [, <uVarN> ] => ;
                   _STKVARDEF(<uVar1>) ;;
                 [ _STKVARDEF(<uVarN>); ]
 
-#include "Dialog.ch"
-#include "Font.ch"
-//#include "Ini.ch"
-#include "PTMenu.ch"
-#include "Print.ch"
+#include "dialog.ch"
+#include "font.ch"
+//#include "ini.ch"
+#include "ptmenu.ch"
+#include "print.ch"
 
 #ifndef CLIPPER501
-  #include "Colors.ch"
-//  #include "DLL.ch"
-  #include "Folder.ch"
+  #include "colors.ch"
+//  #include "dll.ch"
+  #include "folder.ch"
   #include "msobject.ch"
-//  #include "ODBC.ch"
-//  #include "DDE.ch"
-//  #include "Video.ch"
-  #include "VKey.ch"
-//  #include "Tree.ch"
-  #include "WinApi.ch"
+//  #include "odbc.ch"
+//  #include "dde.ch"
+//  #include "video.ch"
+  #include "vkey.ch"
+//  #include "tree.ch"
+  #include "winapi.ch"
 #endif
 
-#include "FWCommand.ch"
-#include "FWCSS.CH"
+#include "fwcommand.ch"
+#include "fwcss.ch"
 
 
 #define CRLF Chr(13)+Chr(10)
@@ -59,10 +60,10 @@
 // ----------------------------------------------------------------------
 // Padronizações para Acessibilidade Visual - INICIO
 // ----------------------------------------------------------------------
-	#xtranslate cGetFile([<cMascara>] ,[<cTitulo>] ,[<nMascPadrao>] ,[<cDirInicial>] [,<lSalvar> [,<nOpcoes> [,<aRmtDir> [,<lKeepCase> [,U1 [,U2 [,U3 [,U4 [,U5] ] ] ] ] ] ] ] ]) => ;
+		#xcommand cGetFile([<cMascara>] ,[<cTitulo>] ,[<nMascPadrao>] ,[<cDirInicial>] [,<lSalvar> [,<nOpcoes> [,<aRmtDir> [,<lKeepCase> [,U1 [,U2 [,U3 [,U4 [,U5] ] ] ] ] ] ] ] ]) => ;
 		Iif(FindFunction("FWHasAccMode") .And. FindFunction("AVGetFile") .And. FWHasAccMode(ACC_VISUAL),;
 		 AVGetFile(<cMascara>, <cTitulo>, <nMascPadrao>, <cDirInicial>, <lSalvar>, <nOpcoes>, <aRmtDir>, <lKeepCase>, <U1>, <U2>, <U3>, <U4>, <U5>),;
-		 cGetFile(<cMascara>, <cTitulo>, <nMascPadrao>, <cDirInicial>, <lSalvar>, <nOpcoes>, <aRmtDir>, <lKeepCase>, <U1>, <U2>, <U3>, <U4>, <U5>))
+		 cGetFile(<cMascara>, <cTitulo>, <nMascPadrao>, <cDirInicial>, <lSalvar>, <nOpcoes>, <aRmtDir>, <lKeepCase>))
 	
 	#xcommand MsgAlert(<cMsg> [,<cTitle>]) => ;
 		Iif(FindFunction("APMsgAlert"), APMsgAlert(<cMsg>, <cTitle>), MsgAlert(<cMsg>, <cTitle>))
@@ -78,6 +79,10 @@
 	
 	#xtranslate MsgNoYes(<cMsg> [,<cTitle>]) => ;
 		Iif(FindFunction("APMsgNoYes"), APMsgNoYes(<cMsg>, <cTitle>), (cMsgNoYes:="MsgNoYes", &cMsgNoYes.(<cMsg>, <cTitle>)))
+    
+     #xcommand PtInternal(<nOption> [,<xValue01>[,<xValue02>[,<xValue03>[,<xValue04>[,<xValue05>]]]]]) => ;
+		Iif(FindFunction("FwPtInternal"), FwPtInternal(<nOption>, <xValue01>, <xValue02>, <xValue03>, <xValue04>, <xValue05>), ;
+    PtInternal(<nOption>, <xValue01>, <xValue02>, <xValue03>, <xValue04>, <xValue05>))
 // ----------------------------------------------------------------------
 // Padronizações para Acessibilidade Visual - FIM
 // ----------------------------------------------------------------------
@@ -87,8 +92,8 @@
 
 #xcommand DEFAULT <uVar1> := <uVal1> ;
       [, <uVarN> := <uValN> ] => ;
-    <uVar1> := If( <uVar1> == nil, <uVal1>, <uVar1> ) ;;
-   [ <uVarN> := If( <uVarN> == nil, <uValN>, <uVarN> ); ]
+    <uVar1> := If( ValType(<uVar1>) == "U", <uVal1>, <uVar1> ) ;;
+   [ <uVarN> := If( ValType(<uVarN>) == "U", <uValN>, <uVarN> ); ]
 
 #xcommand RELEASE <ClassName> <oObj1> [,<oObjN>] ;
      => ;
@@ -131,6 +136,18 @@
   [ <oBar> := ] TBar():New( <oWnd>, <nWidth>, <nHeight>, <._3d.>,;
      [ Upper(<(mode)>) ], <oCursor>,,<.lNoAutoAdjust.> )
 
+#xcommand DEFINE BUTTONBAR [ <oBar> ] ;
+     [ <size: SIZE, BUTTONSIZE, SIZEBUTTON > <nWidth>, <nHeight> ] ;
+     [ <_3d: 3D, 3DLOOK> ] ;
+      1  ;
+     [ <wnd: OF, WINDOW, DIALOG> <oWnd> ] ;
+     [ CURSOR <oCursor> ] ;
+     [ <lNoAutoAdjust: NOAUTOADJUST> ] ;
+    => ;
+  [ <oBar> := ] TBar():New( <oWnd>, <nWidth>, <nHeight>, <._3d.>,;
+     [ Upper(<(mode)>) ], <oCursor>,,<.lNoAutoAdjust.> )
+
+	 
 #xcommand DEFINE BUTTON [ <oBtn> ] ;
      [ <bar: OF, BUTTONBAR > <oBar> ] ;
      [ <resource: NAME, RESNAME, RESOURCE> <cResName1> ;

@@ -289,4 +289,3 @@
       [; AX_SetPass( <(password)> )]                                       ;
       [; dbSetIndex( <(index1)> )]                                         ;
       [; dbSetIndex( <(indexn)> )]
-

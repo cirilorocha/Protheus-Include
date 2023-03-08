@@ -5,7 +5,7 @@
 */
 
 #ifndef _SET_CH
-   #include "Set.ch"
+   #include "set.ch"
 #endif
 
 #ifndef _STDWIN_CH
@@ -766,4 +766,3 @@
 #xcommand TEXTBLOCK <*cText*>   => // <cText>
 
 #endif
-

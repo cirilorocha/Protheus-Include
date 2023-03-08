@@ -88,4 +88,3 @@
 
 //=======  CONSTANTES INTEGRACAO REPOM ============//
 #DEFINE TOTVS_REPOM  3108
-

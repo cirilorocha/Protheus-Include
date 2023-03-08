@@ -1,0 +1,104 @@
+#include 'errors.th'
+
+// -------------------------------------------
+// Annotation para uso em test.engineSources()
+// -------------------------------------------
+@annotation engine
+    description     as char     default 'source'
+@end
+
+// ------------
+// IDs control
+// ------------
+#define _Tables_Version_KEY             'tables_version'
+#define _Tables_Version_ID              'tb_v:0720.1'
+
+
+// -----------
+// Global Hash
+// -----------
+#define _UID_TRY                        10
+#define _UID_                           '#UNITTEST#TLPP#'
+#define _UID_table_                     '#create_table#'
+
+// ----------------------
+// Global Hash -> Session
+// ----------------------
+#define _UID_Session_                   '#UNITTEST#SESSION#'
+#define _UID_engine_tlpp_               '#Exclude#Sources#'
+#define _UID_CodeCoverage               '#Code#Coverage#'
+#define _UID_freak                      '#freak#words#'
+
+
+// -------------
+// Config SQLite
+// -------------
+// TABELAS
+#define _dbDrive                        'SQLITE_SYS'
+#define	_AliasIDS                       'CONFIG_IDS_CONTROL'
+#define	_AliasSRC                       'CONFIG_SOURCES'
+#define	_AliasROT                       'CONFIG_ROUTINES'
+#define	_AliasSUI                       'CONFIG_SUITES'
+#define	_AliasCUS                       'CONFIG_SUITES_CUSTOM'
+#define	_AliasEXE                       'TEST_EXECUTION'
+#define	_AliasTAR                       'TEST_TARGETS'
+#define	_AliasRES                       'TEST_RESULTS'
+#define	_AliasTES                       'TEST_TESTS'
+#define	_AliasERR                       'TEST_ERRORS'
+#define	_AliasCCT                       'CODECOVERAGE_TOTAL'
+#define	_AliasCCS                       'CODECOVERAGE_SOURCES'
+#define	_AliasCCL                       'CODECOVERAGE_LINES'
+// VIEWS
+#define	_ViewErrorList                  'error_list'
+#define	_ViewCoverage                   'coverage_list'
+#define	_ViewCoverageTot                'coverage_total'
+
+
+// -------------
+// Config Testes
+// -------------
+#define _Config_types_                  '|all|namespace|source|error|fail|suite|'
+#define _Config_coverage_               '|on|off|'
+#define _ini_empty                      '<NvLl>'
+#define _ini_Session_                   'TLPP_ENGINE_TESTS'
+#define _ini_Unit_Frame_TLPP            'DEVTLPP'
+#define _ini_Unit_TimeGetAll            'TIMEINTERVALGETALLTESTS'
+#define _ini_Unit_FileName              'FILE_NAME_EXPORT'
+#define _ini_Unit_SrcRoot               'SOURCEPATH'
+#define _ini_Unit_SrcSkip               'SKIPPEDSOURCEPATH'
+#define _ini_Unit_ModeSrc               'DISCOVERYMODE'
+#define _ini_Unit_CodeCoverage          'CODECOVERAGE'
+#define _ini_Unit_Exp_Coverage_JSON     'CODECOVERAGE_EXPORT_JSON'
+#define _ini_Unit_Exp_Coverage_TFS      'CODECOVERAGE_EXPORT_TFS'
+#define _ini_Unit_Coverage_Percent      'CODECOVERAGE_PERCENT'
+#define _ini_Unit_Coverage_Filter_Src   'CODECOVERAGE_FILTER_SRC'
+#define _ini_Unit_Freak                 'ISFREAK'
+#define _ini_Unit_ShutDown              'SHUTDOWN'
+
+
+// ------------
+// array Assert
+// ------------
+#define _Assert_annotation_description  1
+#define _Assert_description             2
+#define _Assert_value                   3
+#define _Assert_function                4
+#define _Assert_expected                5
+#define _Assert_ok                      6
+#define _Assert_error                   7
+#define _Assert_NameFunction            8
+#define _Assert_NameClass               9
+#define _Assert_NameMethod              10
+#define _Assert_Start                   11
+#define _Assert_End                     12
+#define _Assert_Skipped                 13
+#define _Assert_MAX                     13
+
+// ---------------------
+// Mensagens de controle
+// ---------------------
+#define _db_Ignore_                     '_ignore_'
+#define _sys_error_                     'error before test run'
+#define _sys_errorExec_                 'error -'
+#define _sys_errorLog_                  'Error log -'
+#define _sys_unknown_call               'unknown call'

@@ -121,4 +121,3 @@
 #xcommand DEFINE CELL HEADER BORDER OF <oObj> <cEdge: EDGE_TOP,EDGE_BOTTOM,EDGE_LEFT,EDGE_RIGHT,EDGE_ALL> [ WEIGHT <nWeight> ] [ COLOR <nRGBColor>] ;
 	=> ;
 	<oObj>:SetCellBorder(Subs(<"cEdge">,6), [ <nWeight> ], [ <nRGBColor> ], .T. )
-

@@ -51,12 +51,12 @@
 #endif
 
 #ifdef VER_P11
-  #define FASE    "P11"
-  #define RELEASE "01"
+  #define FASE    "P12"
+  #define RELEASE "02"
 #endif
 
-#define BUILD       "100219"	//Usar formato YYMMDD
-#define BUILD_WEB   "100219"  //Usar formato YYMMDD
+#define BUILD       "140814"	//Usar formato YYMMDD
+#define BUILD_WEB   "140814"  	//Usar formato YYMMDD
 
 // NOTA: Ao modificar o valor de BUILD_WEB, proceder:
 //       . check-out do arquivo build.dw (site SigaDW)
@@ -71,16 +71,6 @@
 //       ser revolvido.
 // define DWCACHE
 #endif
-  
-#ifdef SPANISH
-	#define IDIOMA "ES"
-	#define IDIOMA2 "es"
-#else
-#ifdef ENGLISH
-	#define IDIOMA "EN"
-	#define IDIOMA2 "en"
-#else
-	#define IDIOMA "PT"
-	#define IDIOMA2 "pt"
-#endif
-#endif
+
+#define IDIOMA Upper(SubStr(FwRetIdiom(), 1, 2))
+#define IDIOMA2 SubStr(FwRetIdiom(), 1, 2)
