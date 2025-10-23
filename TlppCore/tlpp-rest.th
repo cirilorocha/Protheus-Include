@@ -7,32 +7,74 @@
 #ifndef TLPP_REST_TH
 #define TLPP_REST_TH
 
+/* ------------------------------------ */
 @annotation Get
   endpoint as char 
   description as char default ""
+  title as char default ""
+  params as char default ""
+  requestBody as char default ""
+  responses as char default ""
+  id as numeric default 0
+  language as character default "BRA"
 @end
+/* ------------------------------------ */
 @annotation Put
   endpoint as char 
-  description as char default ""    
+  description as char default ""
+  title as char default ""
+  params as char default ""
+  requestBody as char default ""
+  responses as char default ""
+  id as numeric default 0
+  language as character default "BRA"
 @end
+/* ------------------------------------ */
 @annotation Patch
   endpoint as char 
-  description as char default ""    
+  description as char default ""
+  title as char default ""
+  params as char default ""
+  requestBody as char default ""
+  responses as char default ""
+  id as numeric default 0
+  language as character default "BRA"
 @end
+/* ------------------------------------ */
 @annotation Post
   endpoint as char
-  description as char default ""    
+  description as char default ""
+  title as char default ""
+  params as char default ""
+  requestBody as char default ""
+  responses as char default ""
+  id as numeric default 0
+  language as character default "BRA"
 @end
+/* ------------------------------------ */
 @annotation Delete
   endpoint as char
-  description as char default ""    
+  description as char default ""
+  title as char default ""
+  params as char default ""
+  requestBody as char default ""
+  responses as char default ""
+  id as numeric default 0
+  language as character default "BRA"
 @end
-@annotation AuthGuard       
-@end
-
+/* ------------------------------------ */
 @annotation Options  
   endpoint as char 
-  description as char default ""         
+  description as char default ""  
+  title as char default ""
+  params as char default ""
+  requestBody as char default ""
+  responses as char default ""
+  id as numeric default 0
+  language as character default "BRA"
+@end
+
+@annotation AuthGuard       
 @end
 
 #endif /* TLPP_REST_TH */

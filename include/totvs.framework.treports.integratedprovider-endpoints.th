@@ -5,7 +5,11 @@
 #define TREPORTS_SCHEMA_ID "schemaId"
 #define TREPORTS_DATA_ID "dataId"
 #define TREPORTS_FILTER_ID "filterId"
+#define TREPORTS_OPTIONS_ID "optionsId"
+#define TREPORTS_PARAM_ID "paramId"
 
 #define TREPORTS_SCHEMA_ENDPOINT "/api/framework/treports/integratedprovider/v1/schema/:schemaId"
 #define TREPORTS_DATA_ENDPOINT "/api/framework/treports/integratedprovider/v1/getdata/:dataId"
 #define TREPORTS_FILTER_ENDPOINT "/api/framework/treports/integratedprovider/v1/getfilter/:schemaId/:filterId/filter"
+
+#define SMARTVIEW_OPTIONS_ENDPOINT "/api/framework/treports/integratedprovider/v1/options/:optionsId/:paramId"

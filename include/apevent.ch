@@ -111,7 +111,6 @@ Defines de Atualizacao
 #xtranslate e_RemoveParam           =>  93
 #xtranslate e_RemoveSXA   	        =>  95
 #xtranslate e_RemoveSX1   	        =>  96
-#xtranslate e_RemoveXAU   	        =>  98
 
 /*
 Defines de erros
@@ -160,5 +159,3 @@ Defines de erros
 #xtranslate e_WriteLog		    	=>  91
 #xtranslate e_SX2NoModeChange   	=>  92
 #xtranslate e_RemoveSX5   	        =>  94
-#xtranslate e_ReviewNumGroup        =>  97 
-#xtranslate e_FieldChangeGrpNum     =>  99

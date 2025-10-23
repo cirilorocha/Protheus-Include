@@ -39,13 +39,38 @@
 		_ObjNewClass( <ClsNam> , [<NSpace>.][<SupCls>]) 
 
 
+/*
+
+// [DTAPPSRV-8632] Essa era a escrita original do xcommand para IMPLEMENTS ...
+// Essa forma falhava com uso de 3 ou mais interfaces
+// Tambem haviam problemas com intefaces citadas com namespace
+// Do ponto de vista gramatical, havia problemas por conta de uma sequencia de clausulas opcionais [A][B][C][D][E]
+// Essas clausulas deixam o appre confuso
+
 #xcommand CLASS <ClsNam>   ;
 		[ <from: INHERIT FROM, INHERIT, FROM, OF> [<NSpace>.]<SupCls> ];
 		<implements: IMPLEMENTS> [<NSpace2>.]<SupCls2> [, [<NSpace3>.]<SupCls3> ][, [<NSpace4>.]<SupCls4> ][, [<NSpace5>.]<SupCls5> ][, [<NSpace6>.]<SupCls6> ];
 		=> ;
 		_ObjNewClass( <ClsNam> , [<NSpace>.][<SupCls>] , [<NSpace2>.][<SupCls2>] , [<NSpace3>.][<SupCls3>], [<NSpace4>.][<SupCls4>], [<NSpace5>.][<SupCls5>], [<NSpace6>.][<SupCls6>]) 
 
-		
+*/
+
+/*
+// [DTAPPSRV-8632] Essa agora eh a forma correta para o xcommand de IMPLEMENTS ...
+// De acordo com as regras do compilador, a gente aceita de 1 a 5 interfaces
+// Tambem aceitamos 5 niveis de namespace: "implements a.b.c.d.e.Inteface1"
+// Do ponto de vista gramatical, essa forma sana o problema da sequencia de opcionais
+// [x][y][z][w][k] trocando por aninhamento [ A [ B [ C [ D [ E ] ] ] ] ]
+// Isso os parsers conseguem entender certinho
+*/
+
+#xcommand CLASS <ClsNam>   ;
+		[ <from: INHERIT FROM, INHERIT, FROM, OF> [<n0>.]<SupCls> ] ;
+		<implements: IMPLEMENTS> [<n1a>.[<n1b>.[<n1c>.[<n1d>.[<n1e>.]]]]]<i1>[,[<n2a>.[<n2b>.[<n2c>.[<n2d>.[<n2e>.]]]]]<i2>[,[<n3a>.[<n3b>.[<n3c>.[<n3d>.[<n3e>.]]]]]<i3>[,[<n4a>.[<n4b>.[<n4c>.[<n4d>.[<n4e>.]]]]]<i4>[,[<n5a>.[<n5b>.[<n5c>.[<n5d>.[<n5e>.]]]]]<i5>]]]] ;
+		=> ;
+		_ObjNewClass( <ClsNam> , [<n0>.][<SupCls>] , [<n1a>.[<n1b>.[<n1c>.[<n1d>.[<n1e>.]]]]]<i1> , [<n2a>.[<n2b>.[<n2c>.[<n2d>.[<n2e>.]]]]]<i2> , [<n3a>.[<n3b>.[<n3c>.[<n3d>.[<n3e>.]]]]]<i3> , [<n4a>.[<n4b>.[<n4c>.[<n4d>.[<n4e>.]]]]]<i4> , [<n5a>.[<n5b>.[<n5c>.[<n5d>.[<n5e>.]]]]]<i5> )
+
+
 #xcommand INTERFACE <ClsNam>   ;
 		=> ;
 		_ObjNewInterface( <ClsNam> ) 

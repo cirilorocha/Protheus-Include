@@ -1,0 +1,76 @@
+///////////////////////////////////////
+//INCLUDE GERADO PELA FUNCAO CXGETINC//
+///////////////////////////////////////
+
+#define PT_STR0001 FWI18NLANG("PARMTYPECH","PT_STR0001",0001)
+#define PT_STR0002 FWI18NLANG("PARMTYPECH","PT_STR0002",0002)
+#define PT_STR0003 FWI18NLANG("PARMTYPECH","PT_STR0003",0003)
+#define PT_STR0004 FWI18NLANG("PARMTYPECH","PT_STR0004",0004)
+#define PT_STR0005 FWI18NLANG("PARMTYPECH","PT_STR0005",0005)
+#define PT_STR0006 FWI18NLANG("PARMTYPECH","PT_STR0006",0006)
+#define PT_STR0007 FWI18NLANG("PARMTYPECH","PT_STR0007",0007)
+#define PT_STR0008 FWI18NLANG("PARMTYPECH","PT_STR0008",0008)
+#define PT_STR0009 FWI18NLANG("PARMTYPECH","PT_STR0009",0009)
+#define PT_STR0010 FWI18NLANG("PARMTYPECH","PT_STR0010",0010)
+#define PT_STR0011 FWI18NLANG("PARMTYPECH","PT_STR0011",0011)
+#define PT_STR0012 FWI18NLANG("PARMTYPECH","PT_STR0012",0012)
+#define PT_STR0013 FWI18NLANG("PARMTYPECH","PT_STR0013",0013)
+#define PT_STR0014 FWI18NLANG("PARMTYPECH","PT_STR0014",0014)
+#define PT_STR0015 FWI18NLANG("PARMTYPECH","PT_STR0015",0015)
+#define PT_STR0016 FWI18NLANG("PARMTYPECH","PT_STR0016",0016)
+#define PT_STR0017 FWI18NLANG("PARMTYPECH","PT_STR0017",0017)
+#define PT_STR0018 FWI18NLANG("PARMTYPECH","PT_STR0018",0018)
+#define PT_STR0019 FWI18NLANG("PARMTYPECH","PT_STR0019",0019)
+#define PT_STR0020 FWI18NLANG("PARMTYPECH","PT_STR0020",0020)
+#define PT_STR0021 FWI18NLANG("PARMTYPECH","PT_STR0021",0021)
+#define PT_STR0022 FWI18NLANG("PARMTYPECH","PT_STR0022",0022)
+#define PT_STR0023 FWI18NLANG("PARMTYPECH","PT_STR0023",0023)
+#define PT_STR0024 FWI18NLANG("PARMTYPECH","PT_STR0024",0024)
+#define PT_STR0025 FWI18NLANG("PARMTYPECH","PT_STR0025",0025)
+#define PT_STR0026 FWI18NLANG("PARMTYPECH","PT_STR0026",0026)
+#define PT_STR0027 FWI18NLANG("PARMTYPECH","PT_STR0027",0027)
+#define PT_STR0028 FWI18NLANG("PARMTYPECH","PT_STR0028",0028)
+#define PT_STR0029 FWI18NLANG("PARMTYPECH","PT_STR0029",0029)
+#define PT_STR0030 FWI18NLANG("PARMTYPECH","PT_STR0030",0030)
+#define PT_STR0031 FWI18NLANG("PARMTYPECH","PT_STR0031",0031)
+
+//Cirilo Rocha - Prefiro definir a string dentro do include para diminuir o overhead do sistema
+#IfDef SPANISH
+		#define PT_STR0001 "argumento #"
+		#define PT_STR0002 ", parámetro"
+		#define PT_STR0003 "error, previsto"
+		#define PT_STR0004 "error de argumento en el parámetro"
+		#define PT_STR0005 ", previsto"
+		#define PT_STR0006 "error en el parámetro"
+		#define PT_STR0007 "error, clase prevista"
+		#define PT_STR0008 ", clase prevista"
+		#define PT_STR0009 "error, devolución prevista"
+		#define PT_STR0010 "error de argumento en el bloque"
+		#define PT_STR0011 ", devolución prevista"
+#Else
+	#IfDef ENGLISH
+		#define PT_STR0001 "argument #"
+		#define PT_STR0002 ", parameter "
+		#define PT_STR0003 " error, expected "
+		#define PT_STR0004 "argument error in parameter "
+		#define PT_STR0005 ", expected "
+		#define PT_STR0006 "error in parameter "
+		#define PT_STR0007 " error, class expected "
+		#define PT_STR0008 ", class expected "
+		#define PT_STR0009 " error , return expected "
+		#define PT_STR0010 "argument error in block "
+		#define PT_STR0011 ", return expected "
+	#Else
+		#define PT_STR0001 "argumento #"
+		#define PT_STR0002 ", parâmetro"
+		#define PT_STR0003 "erro, previsto"
+		#define PT_STR0004 "erro de argumento no parâmetro"
+		#define PT_STR0005 ", previsto"
+		#define PT_STR0006 "erro no parâmetro"
+		#define PT_STR0007 "erro, classe prevista"
+		#define PT_STR0008 ", classe prevista"
+		#define PT_STR0009 "erro, retorno previsto"
+		#define PT_STR0010 "erro de argumento no bloco"
+		#define PT_STR0011 ", retorno previsto"
+	#EndIf
+#EndIf

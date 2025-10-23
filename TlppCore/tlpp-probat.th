@@ -32,8 +32,8 @@
   test            as char     default ""
   description     as char     default ""
   target          as char     default ""
-  runWithAll      as logical  default .T.        // Determina se Teste rodará com suite ALL (nome completo)
-  rwa             as logical  default .T.        // Determina se Teste rodará com suite ALL (sigla)
+  runWithAll      as logical  default .T.        // Determina se Teste rodara com suite ALL (nome completo)
+  rwa             as logical  default .T.        // Determina se Teste rodara com suite ALL (sigla)
 @end
 
 @annotation Test
@@ -72,6 +72,8 @@
   appServerVersion  as char     default ""
   appServerName     as char     default ""
   system            as char     default ""
+  database          as char     default ""
+  custom            as char     default ""
 @end
 
 #command SKIPTEST ;
@@ -79,11 +81,16 @@
                     [ TLPPVERSION <tlpp> ] ;
                     [ APPSERVERVERSION <app_v> ] ;
                     [ APPSERVERNAME <app_n> ] ;
+                    [ DATABASE <db_name> ] ;
+                    [ CUSTOM <custom> ] ;
   => ;
+      __skip := '' ;;
       [ if( valtype(<os>)<>"C", __soName := '', __soName := <(os)> ) ] ;;
       [ if( valtype(<tlpp>)<>"C", __tlppVersion := '', __tlppVersion := <(tlpp)> ) ] ;;
       [ if( valtype(<app_v>)<>"C", __appVersion := '', __appVersion := <(app_v)> ) ] ;;
       [ if( valtype(<app_n>)<>"C", __appName := '', __appName := <(app_n)> ) ] ;;
+      [ if( valtype(<db_name>)<>"C", __dataDase := '', __dataDase := <(db_name)> ) ] ;;
+      [ if( valtype(<custom>)<>"C", __custom := '', __custom := <(custom)> ) ] ;;
       lForceSkip := .T.
 
 #command  SKIPASSERT ;
@@ -91,15 +98,16 @@
                     [ TLPPVERSION <tlpp> ] ;
                     [ APPSERVERVERSION <app_v> ] ;
                     [ APPSERVERNAME <app_n> ] ;
+                    [ DATABASE <db_name> ] ;
+                    [ CUSTOM <custom> ] ;
   => ;
-      __soName := '' ;;
-      __tlppVersion := '' ;;
-      __appVersion := '' ;;
-      __appName := '' ;;
+      __skip := '' ;;
       [ if( valtype(<os>)<>"C", __soName := '', __soName := upper(<(os)>) ) ] ;;
       [ if( valtype(<tlpp>)<>"C", __tlppVersion := '', __tlppVersion := <(tlpp)> ) ] ;;
       [ if( valtype(<app_v>)<>"C", __appVersion := '', __appVersion := <(app_v)> ) ] ;;
       [ if( valtype(<app_n>)<>"C", __appName := '', __appName := upper(<(app_n)>) ) ] ;;
+      [ if( valtype(<db_name>)<>"C", __dataDase := '', __dataDase := <(db_name)> ) ] ;;
+      [ if( valtype(<custom>)<>"C", __custom := '', __custom := <(custom)> ) ] ;;
       lForceSkip := .T.
 
 
@@ -116,7 +124,7 @@
 #xcommand SUITE <S> EXCLUSIVE;
   => ;
       @suiteConfig( mode_run="exclusive", suite_name=<(S)> ) ;;
-      function mark_<S>_suite_config() ;;
+      function U_mark_<S>_suite_config() ;;
       return Nil
 
 
@@ -128,20 +136,20 @@
 @annotation coverage
   percent         as numeric 	default 0
   type            as char     default ""
-  name_space      as char     default ""     // nao retirar "hifen", pois gera erro de compilação
+  name_space      as char     default ""     // nao retirar "hifen", pois gera erro de compilacao
   source          as char     default ""
 @end
 
 #xcommand COVERAGE PERCENTAGE <V> SOURCE <S> TYPE <T>;
   => ;
       @Coverage( percent=<V>, type=<(T)>, name_space="", source=<(S)> ) ;;
-      function mark_<S>_coverage() ;;
+      function U_mark_<S>_coverage() ;;
       return Nil
 
 #xcommand COVERAGE PERCENTAGE <V> NAMESPACE <N> SOURCE <S> TYPE <T>;
   => ;
       @Coverage( percent=<V>, type=<(T)>, name_space=<(N)>, source=<(S)> ) ;;
-      function mark_<S>_coverage() ;;
+      function U_mark_<S>_coverage() ;;
       return Nil
 
 #endif

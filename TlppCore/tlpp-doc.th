@@ -1,0 +1,27 @@
+/*
+	Header : tlpp-doc.th
+	Copyright (c) 2019, TOTVS SA
+	All rights reserved.
+*/
+
+#ifndef TLPP_DOC_TH
+#define TLPP_DOC_TH
+
+#xcommand TLPP COMPONENT <cName> <cProperty> <cType> <example>;
+          => @t1p9_c0mp0n3n7(name=\"<cName>\",property=\"<cProperty>\") \; ;  
+            function U__t1p9_c0mp0n3n7_<cName>_<cProperty>() \; ;
+              local cJson := \"\" \; ;
+              cJson += \"\{\" \; ;
+                cJson += '"component":"' + \"<cName>\" + '",' \; ;
+                cJson += '"property":"' + \"<cProperty>\" + '",' \; ;
+                cJson += '"type":"' + \"<cType>\" + '",' \; ;
+                cJson += '"example":"' + <example> + '"' \; ;
+              cJson += \"\}\" \; ;
+            return cJson
+
+@annotation t1p9_c0mp0n3n7
+  name as char default ""
+  property as char default ""
+@end
+
+#endif /* TLPP_DOC_TH */

@@ -7,11 +7,66 @@
 #ifndef TLPP_I18N_TH
 #define TLPP_I18N_TH
 
+// Array estático que vai armazenar todos os idiomas definidos no fonte
+static _aDefinedIdiom := {} as Array
+
+// Array estático que vai armazenar idiomas no formato 3 letrinhas do Pais e seu correspondente mapeamento
+// Exemplo: BRA->pt-br, ARG->es, RUS->ru-ru, USA->en-us, ...
+// Teremos subarrays do tipo: {'BRA', 'pt-br'}, {'ARG', 'es'}, ...
+static _aMapIdiom := {} as Array
+
+
+// Função que insere um novo idioma defino no fonte
+//#########################################################################################################
+Static Function _DefinedIdiomAdd(cIdiom as Character)
+  aAdd(_aDefinedIdiom, cIdiom)
+Return Nil
+
+// Função que insere um novo mapeamento no array de idiomas
+//#########################################################################################################
+Static Function _MapLanguageAdd(aMap as Array)
+  aAdd(_aMapIdiom, aMap)
+Return Nil
+
+// Função que retorna um array com todos os idiomas definidos no fonte
+//#########################################################################################################
+Static Function _GetDefinedIdiom() as Array
+Local aRet := {} as Array
+aRet := aClone(_aDefinedIdiom)
+Return aRet
+
+// Função que busca e retorna o mapeamento entre a sigla do País e o seu idioma principal
+//#########################################################################################################
+Static Function _MapLanguageFind(cPais as Character) as Character
+Local cRet as Character
+Local i as Numeric
+
+cRet := cPais
+
+// TODO: melhorar o algoritmo de busca? Talvez faça sentido se forem muitos mapeamentos em vista. Por enquanto, nada tão crítico porque só é feito uma vez por thread.
+For i := 1 to len(_aMapIdiom)
+  If (_aMapIdiom[i][1] == cPais)
+    cRet := _aMapIdiom[i][2]
+    exit
+  EndIf
+End
+
+Return cRet
+
+
 //TODO - limitado a fontes com extensão de tamanho 5 (.tlpp, por exemplo) ... melhorar ?!?!
 #xtranslate Localize(<n>[,<default,...>])  => tlpp.i18n.translationStr(Left(ProcSource(), Len(ProcSource()) - 5), <n>, <default>)
 
+#xtranslate tlpp.i18n.Localize(<n>[,<default,...>])  => tlpp.i18n.translationStr(Left(ProcSource(), Len(ProcSource()) - 5), <n>, <default>)
+
 #xcommand TOSTRING <NOMEVAR>#<cVAL,...> ;
           => <NOMEVAR> := \'<cVAL>\'
+
+#xcommand TLPP BEGIN TRANSLATION <SRC> ;
+          => Function U_<SRC>DEFINEDIDIOM() \; ;
+             Return _GetDefinedIdiom() \; ;
+             ;
+             Static Function LoadStr(cIdiom, cType)
 
 #xcommand TLPP BEGIN TRANSLATION  => Static Function LoadStr(cIdiom, cType)
 
@@ -19,61 +74,82 @@
 
 #xcommand TRANSLATE <nCOD>#STR#<cIdiom>#<cVAL,...> ;
           =>  If (cIdiom == \"<cIdiom>\" \.AND\. cType == \"STR\") \; ; 
-                If (<nCOD> \> len(a<cIdiom>)) \; ;
-                  aSize(a<cIdiom>, <nCOD>+1) \; ;
+                If (<nCOD> \> len(_a<cIdiom>)) \; ;
+                  aSize(_a<cIdiom>, <nCOD>+1) \; ;
                 EndIf \; ;
-                a<cIdiom>\[<nCOD>\] := \'<cVAL>\' \; ;
+                _a<cIdiom>\[<nCOD>\] := <cVAL> \; ;
+              EndIf
+
+#xcommand TRANSLATE <nCOD>#STR#<cIdiom1>-<cIdiom2>#<cVAL,...> ;
+          =>  If (cIdiom == \"<cIdiom1>-<cIdiom2>\" \.AND\. cType == \"STR\") \; ;
+                If (<nCOD> \> len(_a<cIdiom1>_<cIdiom2>)) \; ;
+                  aSize(_a<cIdiom1>_<cIdiom2>, <nCOD>+1) \; ;
+                EndIf \; ;
+                _a<cIdiom1>_<cIdiom2>\[<nCOD>\] := <cVAL> \; ;
               EndIf
 
 #xcommand TRANSLATE <nCOD>#URI#<cIdiom>#<cVAL,...> ;
           =>  If (cIdiom == \"<cIdiom>\" \.AND\. cType == \"URI\") \; ; 
-                If (<nCOD> \> len(aURI<cIdiom>)) \; ;
-                  aSize(aURI<cIdiom>, <nCOD>+1) \; ;
+                If (<nCOD> \> len(_aURI<cIdiom>)) \; ;
+                  aSize(_aURI<cIdiom>, <nCOD>+1) \; ;
                 EndIf \; ;
-                aURI<cIdiom>\[<nCOD>\] := \'<cVAL>\' \; ;
+                _aURI<cIdiom>\[<nCOD>\] := \'<cVAL>\' \; ;
+              EndIf
+
+#xcommand TRANSLATE <nCOD>#URI#<cIdiom1>-<cIdiom2>#<cVAL,...> ;
+          =>  If (cIdiom == \"<cIdiom1>-<cIdiom2>\" \.AND\. cType == \"URI\") \; ;
+                If (<nCOD> \> len(_aURI<cIdiom1>_<cIdiom2>)) \; ;
+                  aSize(_aURI<cIdiom1>_<cIdiom2>, <nCOD>+1) \; ;
+                EndIf \; ;
+                _aURI<cIdiom1>_<cIdiom2>\[<nCOD>\] := \'<cVAL>\' \; ;
               EndIf
 
 #xcommand TRANSLATE <nCOD>#STR#ALL#<cVAL,...> ;
-          =>  If (cType == \"STR\") \; ; 
-                If (<nCOD> \> len(aALL)) \; ;
-                  aSize(aALL, <nCOD>+1) \; ;
+          =>  If (cType == \"STR\") \; ;
+                If (<nCOD> \> len(_aALL)) \; ;
+                  aSize(_aALL, <nCOD>+1) \; ;
                 EndIf \; ;
-                If (aALL\[<nCOD>\] == Nil) \; ;
-                  aALL\[<nCOD>\] := \'<cVAL>\' \; ;
+                If (_aALL\[<nCOD>\] == Nil) \; ;
+                  _aALL\[<nCOD>\] := <cVAL> \; ;
                 EndIf \; ;
               EndIf
 
 #xcommand TRANSLATE <nCOD>#URI#ALL#<cVAL,...> ;
-          =>  If (cType == \"URI\") \; ; 
-                If (<nCOD> \> len(aURIALL)) \; ;
-                  aSize(aURIALL, <nCOD>+1) \; ;
+          =>  If (cType == \"URI\") \; ;
+                If (<nCOD> \> len(_aURIALL)) \; ;
+                  aSize(_aURIALL, <nCOD>+1) \; ;
                 EndIf \; ;
-                If (aURIALL\[<nCOD>\] == Nil) \; ;
-                  aURIALL\[<nCOD>\] := \'<cVAL>\' \; ;
+                If (_aURIALL\[<nCOD>\] == Nil) \; ;
+                  _aURIALL\[<nCOD>\] := \'<cVAL>\' \; ;
                 EndIf \; ;
               EndIf
 
 #xcommand TLPP TRANSLATION <cIdiom> <SRC> ;
-          =>  Function <SRC>4<cIdiom>(cUID, nIndex) \; ;
+          =>  Static _dummy_defined_<cIdiom> := _DefinedIdiomAdd(\"<cIdiom>\") \; ;
+              ;
+              Function U_<SRC>4<cIdiom>(cUID, nIndex, lReload) \; ;
                 Local cRet := \"\" \; ;
                 Local i \; ;
-                Static a<cIdiom> := \{\} \; ;
-                Static l<cIdiom> := \.F\. \; ;
-                If ( ! l<cIdiom> ) \; ;
-                  Static aALL := \{\} \; ;
+                Static _a<cIdiom> := \{\} \; ;
+                Static _l<cIdiom> := \.F\. \; ;
+                if (lReload) \; ;
+                   _l<cIdiom> := \.F\. \; ;
+                EndIf \; ;
+                If ( ! _l<cIdiom> ) \; ;
+                  Static _aALL := \{\} \; ;
                   VarSetUID(cUID, \.T\.) \; ;
                   VarSetXD(cUID, \"0\", \"0\") \; ;
-                  l<cIdiom> := \.T\. \; ;
+                  _l<cIdiom> := \.T\. \; ;
                   LoadStr(\"<cIdiom>\", \"STR\") \; ;
-                  For i := 1 to len(a<cIdiom>) \; ;
-                    if ( ValType(a<cIdiom>\[i\]) == 'C' .and. len(a<cIdiom>\[i\])>0 )\; ;
-                      VarSetXD(cUID, cValToChar(i), a<cIdiom>\[i\]) \; ;
+                  For i := 1 to len(_a<cIdiom>) \; ;
+                    if ( ValType(_a<cIdiom>\[i\]) == 'C' .and. len(_a<cIdiom>\[i\])>0 )\; ;
+                      VarSetXD(cUID, cValToChar(i), _a<cIdiom>\[i\]) \; ;
                     endif\; ;
                   End \; ;
-                  For i := 1 to len(aALL) \; ;
-                    If ( (i > len(a<cIdiom>) \.OR\. (ValType(a<cIdiom>\[i\]) == 'U')) \.AND\. (ValType(aALL\[i\]) == 'C')) \; ;
-                      VarSetXD(cUID, cValToChar(i), aALL\[i\]) \; ; 
-                    EndIf \; ;  				   
+                  For i := 1 to len(_aALL) \; ;
+                    If ( (i > len(_a<cIdiom>) \.OR\. (ValType(_a<cIdiom>\[i\]) == 'U')) \.AND\. (ValType(_aALL\[i\]) == 'C')) \; ;
+                      VarSetXD(cUID, cValToChar(i), _aALL\[i\]) \; ;
+                    EndIf \; ;
                   End \; ;
                 EndIf \; ;
                 VarGetXD(cUID, cValToChar(nIndex), @cRet) \; ;
@@ -81,27 +157,116 @@
               ;
               ;
               ;
-              Function <SRC>4<cIdiom>URI(cUID, nIndex) \; ;
+              Function U_<SRC>4<cIdiom>URI(cUID, nIndex) \; ;
                 Local cRet := \"\" \; ;
                 Local i \; ;
-                Static aURI<cIdiom> := \{\} \; ;
-                Static lURI<cIdiom> := \.F\. \; ;
-                If ( ! lURI<cIdiom> ) \; ;
-                  Static aURIALL := \{\} \; ;
+                Static _aURI<cIdiom> := \{\} \; ;
+                Static _lURI<cIdiom> := \.F\. \; ;
+                If ( ! _lURI<cIdiom> ) \; ;
+                  Static _aURIALL := \{\} \; ;
                   VarSetUID(cUID, \.T\.) \; ;
                   VarSetXD(cUID, \"0\", \"0\") \; ;
-                  l<cIdiom> := \.T\. \; ;
+                  _l<cIdiom> := \.T\. \; ;
                   LoadStr(\"<cIdiom>\", \"URI\") \; ;
-                  For i := 1 to len(aURI<cIdiom>) \; ;
-                    VarSetXD(cUID, cValToChar(i), IIF(ValType(aURI<cIdiom>\[i\]) == 'C', aURI<cIdiom>\[i\], \"\")) \; ;               
+                  For i := 1 to len(_aURI<cIdiom>) \; ;
+                    VarSetXD(cUID, cValToChar(i), IIF(ValType(_aURI<cIdiom>\[i\]) == 'C', _aURI<cIdiom>\[i\], \"\")) \; ;
                   End \; ;
-                  For i := 1 to len(aURIALL) \; ;
-                    If ( (i > len(aURI<cIdiom>) \.OR\. (ValType(aURI<cIdiom>\[i\]) == 'U')) \.AND\. (ValType(aURIALL\[i\]) == 'C')) \; ;
-                      VarSetXD(cUID, cValToChar(i), aURIALL\[i\]) \; ; 
-                    EndIf \; ;  				   
+                  For i := 1 to len(_aURIALL) \; ;
+                    If ( (i > len(_aURI<cIdiom>) \.OR\. (ValType(_aURI<cIdiom>\[i\]) == 'U')) \.AND\. (ValType(_aURIALL\[i\]) == 'C')) \; ;
+                      VarSetXD(cUID, cValToChar(i), _aURIALL\[i\]) \; ;
+                    EndIf \; ;
                   End \; ;
                 EndIf \; ;
                 VarGetXD(cUID, cValToChar(nIndex), @cRet) \; ;
               Return cRet
+
+
+#xcommand TLPP TRANSLATION <cIdiom1>-<cIdiom2> <SRC> ;
+          =>  Static _dummy_defined_<cIdiom1>_<cIdiom2> := _DefinedIdiomAdd(\"<cIdiom1>-<cIdiom2>\") \; ;
+              ;
+              Function U_<SRC>4<cIdiom1>_<cIdiom2>(cUID, nIndex, lReload) \; ;
+                Local cRet := \"\" \; ;
+                Local i \; ;
+                Static _a<cIdiom1>_<cIdiom2> := \{\} \; ;
+                Static _l<cIdiom1>_<cIdiom2> := \.F\. \; ;
+                if (lReload) \; ;
+                   _l<cIdiom1>_<cIdiom2> := \.F\. \; ;
+                EndIf \; ;
+                If ( ! _l<cIdiom1>_<cIdiom2> ) \; ;
+                  Static _aALL := \{\} \; ;
+                  VarSetUID(cUID, \.T\.) \; ;
+                  VarSetXD(cUID, \"0\", \"0\") \; ;
+                  _l<cIdiom> := \.T\. \; ;
+                  LoadStr(\"<cIdiom1>-<cIdiom2>\", \"STR\") \; ;
+                  For i := 1 to len(_a<cIdiom1>_<cIdiom2>) \; ;
+                    if ( ValType(_a<cIdiom1>_<cIdiom2>\[i\]) == 'C' .and. len(_a<cIdiom1>_<cIdiom2>\[i\])>0 )\; ;
+                      VarSetXD(cUID, cValToChar(i), _a<cIdiom1>_<cIdiom2>\[i\]) \; ;
+                    endif\; ;
+                  End \; ;
+                  For i := 1 to len(_aALL) \; ;
+                    If ( (i > len(_a<cIdiom1>_<cIdiom2>) \.OR\. (ValType(_a<cIdiom1>_<cIdiom2>\[i\]) == 'U')) \.AND\. (ValType(_aALL\[i\]) == 'C')) \; ;
+                      VarSetXD(cUID, cValToChar(i), _aALL\[i\]) \; ;
+                    EndIf \; ;
+                  End \; ;
+                EndIf \; ;
+                VarGetXD(cUID, cValToChar(nIndex), @cRet) \; ;
+              Return cRet \; ;
+              ;
+              ;
+              ;
+              Function U_<SRC>4<cIdiom1>_<cIdiom2>URI(cUID, nIndex) \; ;
+                Local cRet := \"\" \; ;
+                Local i \; ;
+                Static _aURI<cIdiom1>_<cIdiom2> := \{\} \; ;
+                Static _lURI<cIdiom1>_<cIdiom2> := \.F\. \; ;
+                If ( ! _lURI<cIdiom1>_<cIdiom2> ) \; ;
+                  Static _aURIALL := \{\} \; ;
+                  VarSetUID(cUID, \.T\.) \; ;
+                  VarSetXD(cUID, \"0\", \"0\") \; ;
+                  _l<cIdiom1>_<cIdiom2> := \.T\. \; ;
+                  LoadStr(\"<cIdiom1>-<cIdiom2>\", \"URI\") \; ;
+                  For i := 1 to len(_aURI<cIdiom1>_<cIdiom2>) \; ;
+                    VarSetXD(cUID, cValToChar(i), IIF(ValType(_aURI<cIdiom1>_<cIdiom2>\[i\]) == 'C', _aURI<cIdiom1>_<cIdiom2>\[i\], \"\")) \; ;
+                  End \; ;
+                  For i := 1 to len(_aURIALL) \; ;
+                    If ( (i > len(_aURI<cIdiom1>_<cIdiom2>) \.OR\. (ValType(_aURI<cIdiom1>_<cIdiom2>\[i\]) == 'U')) \.AND\. (ValType(_aURIALL\[i\]) == 'C')) \; ;
+                      VarSetXD(cUID, cValToChar(i), _aURIALL\[i\]) \; ;
+                    EndIf \; ;
+                  End \; ;
+                EndIf \; ;
+                VarGetXD(cUID, cValToChar(nIndex), @cRet) \; ;
+              Return cRet
+
+#xcommand TLPP TRANSLATION MAP <cFromIdiom> -> <cTargetIdiom> <SRC> ;
+          => Static _dummy_<cFromIdiom>_<cTargetIdiom> := _MapLanguageAdd(\{\"<cFromIdiom>\", \"<cTargetIdiom>\"\}) \; ;
+             ;
+             Static _dummy_defined_<cFromIdiom> := _DefinedIdiomAdd(\"<cFromIdiom>\") \; ;
+             ;
+             Function U_<SRC>MAP<cFromIdiom>() \; ;
+             Return _MapLanguageFind(\"<cFromIdiom>\")
+
+#xcommand TLPP TRANSLATION MAP <cFromIdiom> -> <cTargetIdiom1>-<cTargetIdiom2> <SRC> ;
+          => Static _dummy_<cFromIdiom>_<cTargetIdiom1>_<cTargetIdiom2> := _MapLanguageAdd(\{\"<cFromIdiom>\", \"<cTargetIdiom1>-<cTargetIdiom2>\"\}) \; ;
+             ;
+             Static _dummy_defined_<cFromIdiom> := _DefinedIdiomAdd(\"<cFromIdiom>\") \; ;
+             ;
+             Function U_<SRC>MAP<cFromIdiom>() \; ;
+             Return _MapLanguageFind(\"<cFromIdiom>\")
+
+#xcommand TLPP TRANSLATION MAP <cFromIdiom1>-<cFromIdiom2> -> <cTargetIdiom> <SRC> ;
+          => Static _dummy_<cFromIdiom1>_<cFromIdiom2>_<cTargetIdiom> := _MapLanguageAdd(\{\"<cFromIdiom1>-<cFromIdiom2>\", \"<cTargetIdiom>\"\}) \; ;
+             ;
+             Static _dummy_defined_<cFromIdiom1>_<cFromIdiom2> := _DefinedIdiomAdd(\"<cFromIdiom1>-<cFromIdiom2>\") \; ;
+             ;
+             Function U_<SRC>MAP<cFromIdiom1>_<cFromIdiom2>() \; ;
+             Return _MapLanguageFind(\"<cFromIdiom1>-<cFromIdiom2>\")
+
+#xcommand TLPP TRANSLATION MAP <cFromIdiom1>-<cFromIdiom2> -> <cTargetIdiom1>-<cTargetIdiom2> <SRC> ;
+          => Static _dummy_<cFromIdiom1>_<cFromIdiom2>_<cTargetIdiom1>_<cTargetIdiom2> := _MapLanguageAdd(\{\"<cFromIdiom1>-<cFromIdiom2>\", \"<cTargetIdiom1>-<cTargetIdiom2>\"\}) \; ;
+             ;
+             Static _dummy_defined_<cFromIdiom1>_<cFromIdiom2> := _DefinedIdiomAdd(\"<cFromIdiom1>-<cFromIdiom2>\") \; ;
+             ;
+             Function U_<SRC>MAP<cFromIdiom1>_<cFromIdiom2>() \; ;
+             Return _MapLanguageFind(\"<cFromIdiom1>-<cFromIdiom2>\")
 
 #endif /* TLPP_I18N_TH */
