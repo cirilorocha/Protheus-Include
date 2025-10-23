@@ -1,8 +1,8 @@
 TOTVS - Microsiga Protheus Include (Header) Files
 =================================================
 
-Arquivos de cabeçalhos disponibilizados pela TOTVS em 14 de Fevereiro de 2023.
-Arquivos do TlppCore versão 01.03.02
+Arquivos de cabeçalhos disponibilizados pela TOTVS em Outubro de 2025.
+Arquivos do TlppCore versão 01.04.02
 
 Disponibilizado um executável que pode extrair diretamente os arquivos, sem precisar do Pyton RunTime, basta arrastar o arquivo .Ch ou .Th para o extrator que ele processa o arquivo. Também pode ser utilizado o arquivo .Bat que faz esse processamento em uma pasta inteira, basta deixar os dois arquivos (.Exe e .Bat) na mesma pasta, e rodar o batch passando como parâmetro o diretório onde estão os arquivos a serem processados.
 
