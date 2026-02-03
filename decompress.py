@@ -20,14 +20,22 @@ def nomeValido(arq):
 
 # Puxa a lista de nomes de arquivos no diretório atual
 onlyfiles = [f for f in listdir('./include/') if isfile(join('./include/', f))]
+print(onlyfiles)
 
 for i in onlyfiles:
 	if nomeValido(i):
-		# descompacta
-		descompactado = descompactaUmArquivo('./include/' + i)
-		# Monta o nome do arquivo de destino
-		arqDestino = './decompressed/' + i
-		# Cria o arquivo de destino. Grava o arquivo. Fecha o arquivo
-		f = open(arqDestino, 'x')
-		f.write(descompactado)
-		f.close()
+		try:
+			print('Descompactando: ' + './include/' + i)
+			# descompacta
+			descompactado = descompactaUmArquivo('./include/' + i)
+			# Monta o nome do arquivo de destino
+			arqDestino = './decompressed/' + i
+			print(arqDestino)
+			# Cria o arquivo de destino. Grava o arquivo. Fecha o arquivo
+			f = open(arqDestino, 'x')
+			f.write(descompactado)
+			f.close()
+		except Exception as erro:
+			print('')
+			print(erro)
+			print('Não foi possível descompactar o arquivo ' + './include/' + i + '\n')
