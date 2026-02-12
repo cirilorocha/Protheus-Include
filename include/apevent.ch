@@ -6,7 +6,7 @@ Defines das Tarefas
 #xtranslate UPD_NAME_FILE_LOG => 'mpupdlog.log'
 #xtranslate UPD_NEWTABS_RL3X => If( Subs( UPD_VERSION_NUMBER, 1, 6) > '8.11.2' .Or. Subs(UPD_VERSION_NUMBER,1,2)=="11" , 0, 4)
 
-#xtranslate Tsk_ALL			=> 47
+#xtranslate Tsk_ALL			=> 48
 #xtranslate Tsk_INT			=> 1
 #xtranslate Tsk_SIX			=> 2
 #xtranslate Tsk_SX1			=> 3
@@ -54,6 +54,7 @@ Defines das Tarefas
 #xtranslate Tsk_XAS		    => 45
 #xtranslate Tsk_XAT		    => 46
 #xtranslate Tsk_XAU		    => 47
+#xtranslate Tsk_RBE         => 48
 /*
 Defines de eventos
 */
@@ -111,6 +112,8 @@ Defines de Atualizacao
 #xtranslate e_RemoveParam           =>  93
 #xtranslate e_RemoveSXA   	        =>  95
 #xtranslate e_RemoveSX1   	        =>  96
+#xtranslate e_RemoveXAU   	        =>  98
+#xtranslate e_UpdateSX9             =>  106
 
 /*
 Defines de erros
@@ -159,3 +162,11 @@ Defines de erros
 #xtranslate e_WriteLog		    	=>  91
 #xtranslate e_SX2NoModeChange   	=>  92
 #xtranslate e_RemoveSX5   	        =>  94
+#xtranslate e_ReviewNumGroup        =>  97
+#xtranslate e_FieldChangeGrpNum     =>  99
+#xtranslate e_FieldChangeSX2        =>  100
+#xtranslate e_FieldChangeProperty   =>  101
+#xtranslate e_TemplateProperties    =>  102
+#xtranslate e_PreserveUniqueKey     =>  103
+#xtranslate e_InvalidHashFieldRestr =>  104
+#xtranslate e_UpdateFieldRestr      =>  105

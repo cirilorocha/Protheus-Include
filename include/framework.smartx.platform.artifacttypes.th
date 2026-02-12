@@ -1,0 +1,4 @@
+
+#define __ARTIFACT_INTERFACE "1" 
+#define __ARTIFACT_MODEL "2" 
+#define __ARTIFACT_OBJECT "3" 

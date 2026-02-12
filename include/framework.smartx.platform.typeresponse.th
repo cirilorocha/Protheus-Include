@@ -1,0 +1,19 @@
+#define TYPE_CONTEXT_RESPONSE "smartxPlatformContextResponse"
+#define TYPE_CONTEXT_RESPONSE_NONE "smartxPlatformContextResponseNone"
+#define TYPE_CONTEXT_RESPONSE_ERROR "smartxPlatformContextResponseError"
+
+
+#define TYPE_CATALOG_RESPONSE "smartxPlatformCatalogResponse"
+#define TYPE_CATALOG_RESPONSE_NONE "smartxPlatformCatalogResponseNone"
+#define TYPE_CATALOG_RESPONSE_ERROR "smartxPlatformCatalogResponseError"
+
+
+#define TYPE_ARTIFACTS_RESPONSE "smartxPlatformArtifactsResponse"
+#define TYPE_ARTIFACTS_RESPONSE_NONE "smartxPlatformArtifactsResponseNone"
+#define TYPE_ARTIFACTS_RESPONSE_ERROR "smartxPlatformArtifactsResponseError"
+
+
+#define TYPE_APPLY_PROJECT_RESPONSE "smartxPlatformApplyProjectResponse"
+#define TYPE_APPLY_PROJECT_RESPONSE_NONE "smartxPlatformApplyProjectResponseNone"
+#define TYPE_APPLY_PROJECT_RESPONSE_SUCCESS "smartxPlatformApplyProjectResponseSuccess"
+#define TYPE_APPLY_PROJECT_RESPONSE_ERROR "smartxPlatformApplyProjectResponseError"

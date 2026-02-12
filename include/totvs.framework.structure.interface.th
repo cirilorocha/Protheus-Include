@@ -1,0 +1,7 @@
+
+// Annotation das interfaces do SmartX 
+@annotation totvsFrameworkStructureInterface
+    lookup as logical default .F.
+    country as character default 'ALL'
+    description as character default ''
+@end 

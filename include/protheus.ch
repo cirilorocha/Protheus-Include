@@ -90,10 +90,23 @@
 #xtranslate bSETGET(<uVar>) => ;
     { | u | If( PCount() == 0, <uVar>, <uVar> := u ) }
 
+//Padrão, legado
 #xcommand DEFAULT <uVar1> := <uVal1> ;
       [, <uVarN> := <uValN> ] => ;
     <uVar1> := If( ValType(<uVar1>) == "U", <uVal1>, <uVar1> ) ;;
    [ <uVarN> := If( ValType(<uVarN>) == "U", <uValN>, <uVarN> ); ]
+
+//TLPP - Variáveis que  aceitam nulo: Object, CodeBlock, Array, Json, Variant, Variadic, Decimal
+#xcommand FWNULLDEFAULT <uVar1> := <uVal1> => ;
+    if <uVar1> == nil; <uVar1> := <uVal1> ; endif;
+
+//TLPP - Variáveis que não aceitam nulo: Character, Date, Numeric, Integer, Logical, Double
+#xcommand FWDEFAULT <uVar1> := <uVal1> => ;
+    If ValType(<uVar1>) == "U"; <uVar1> := <uVal1> ; endif;
+
+//ADVPL - Qualquer parâmetro em ADVPL, pois ADVPL aceita nulo, dessa forma temos uma separação entre ADVPL e TLPP
+#xcommand FWADVPLDEFAULT <uVar1> := <uVal1> => ;
+    if <uVar1> == nil; <uVar1> := <uVal1> ; endif;;
 
 #xcommand RELEASE <ClassName> <oObj1> [,<oObjN>] ;
      => ;
