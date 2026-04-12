@@ -4,6 +4,7 @@
 #define TOKEN_PARENTS_EXP 3
 #define TOKEN_BINARY_EXP 4
 #define TOKEN_LIST_EXP 5
+#define TOKEN_COLLECTION_EXP 6
 
 //Tipos de literais
 #define TOKEN_STRINGSIMPLE 1
@@ -28,6 +29,10 @@
 
 //Tipos de IDENTIFIER
 #define TOKEN_ID_NAME 
+#define TOKEN_ID_ALIAS 2
 
 //Tipos de Expression List
 #define TOKEN_ROOT_EXPRESSIONS 1
+
+//Tipos de collection
+#define TOKEN_ANY 1

@@ -71,6 +71,7 @@
 #DEFINE IMP_ODF   7
 #DEFINE IMP_PDFMAIL 8
 #DEFINE IMP_MAILCOMPROVA 9
+#DEFINE IMP_JSON 10
 
 //Constante contendo os tipos de impressão possiveis para o ECM
 #DEFINE IMP_ECM				"4|5|6|7"
@@ -155,4 +156,13 @@
 #DEFINE PPYME		11
 #DEFINE PPICTURE	12
 
-
+//------------------------------------
+// Posições no array de retorno da função FWSchPrintCfg
+//------------------------------------
+#DEFINE D_DEVICE     1
+#DEFINE D_DESTINY    2
+#DEFINE D_TITLE      3
+#DEFINE D_ORDER      4
+#DEFINE D_TYPE_PRINT 5
+#DEFINE D_FORMAT_XLS 6
+#DEFINE D_LAYOUT     7

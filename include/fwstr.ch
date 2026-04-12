@@ -20,3 +20,4 @@
 #DEFINE FW_STR_LINE         _STR0018 //Microsiga
 #DEFINE FW_STR_PRODUCT_LINE _STR0019 //Microsiga Protheus
 #DEFINE FW_STR_WEBHELP      _STR0020 //suporte.totvs.com
+#DEFINE FW_STR_DW_ALERT     _STR0024 //Chamada de função do módulo SigaDW não permitida

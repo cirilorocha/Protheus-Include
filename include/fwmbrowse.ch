@@ -1,5 +1,8 @@
 #INCLUDE "fwbrowse.ch"
 
+#ifndef _FWMBROWSE_CH
+#define _FWMBROWSE_CH
+
 #xcommand DEFINE FWMBROWSE <oFWBrowse> ;
 	[ ALIAS <cAlias> ] ;
 	[ GROUP <bGroup> ] ;
@@ -343,5 +346,11 @@
  			 [ <lDisable:DISABLE MENU> ] ;
 			 [ ID <cId> ] ;
  			 [ TOOLBAR <cToolbar> ] ;
+			 [ <lPageAction:PAGEACTION> ] ;
 			=>;
-				Aadd( <aRotina>, { <cTitle>, <cAction>, 0, <nOperation>, <nAccess>, /*<lMnuIni>,*/ [!<.lDisable.>], [<cId>], [<cToolbar>] })
+				Aadd( <aRotina>, { <cTitle>, <cAction>, 0, <nOperation>, <nAccess>, /*<lMnuIni>,*/ [!<.lDisable.>], [<cId>], [<cToolbar>], , [<.lPageAction.>] })
+
+static function hasSmartX() ;;
+return iif(FindFunction("totvs.framework.application.versionValidator.isValid", .T.),totvs.framework.application.versionValidator.isValid(),.F.);;
+
+#endif

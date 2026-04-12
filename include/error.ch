@@ -52,6 +52,7 @@
 
 #define EG_APPENDLOCK     40
 #define EG_LOCK           41
+#define EG_INVALIDCLASS   42
 
 #define EG_JOB			  59
 

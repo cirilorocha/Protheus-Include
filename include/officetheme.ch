@@ -66,9 +66,9 @@
 													'QPushButton:pressed {border-style: solid; border-style: transparent; border-width: 1px; border-color: #fb8c3c}' + ;
 													'QPushButton:pressed {background-image: url(rpo:OfficeBtnGeneralClicked.png); border-style: transparent}'
 
-#define TH_T_EDIT						   			'Q3TextEdit {background: white}' + ;
-													'Q3TextEdit {border-style: solid; border-width: 1px; border-color: #7f9db9}' + ;
-													'Q3TextEdit:hover {border-color: #ffbd69}'													
+#define TH_T_EDIT						   			'QTextEdit {background: white}' + ;
+													'QTextEdit {border-style: solid; border-width: 1px; border-color: #7f9db9}' + ;
+													'QTextEdit:hover {border-color: #ffbd69}'													
 													
 #define TH_BH										'QPushButton {background-image: url(rpo:OfficeBtnSearch.png); border-style: transparent ; background-repeat: stretch stretch}' + ;
 													'QPushButton:hover {background-image: url(rpo:OfficeBtnSearchHover.png); border-style: transparent ;background-repeat: stretch stretch}' + ;

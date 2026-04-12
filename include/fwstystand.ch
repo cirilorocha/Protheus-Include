@@ -1,11 +1,11 @@
-//Cor base (para personaliza√ß√£o de cores)
+//Cor base (para personalizaÁ„o de cores)
 #DEFINE FWCOLOR_BASE "#103B51"
 
 //==========================================================================================
 // FWLayer
 //==========================================================================================
 
-//T√≠tulo do Frame
+//TÌ≠tulo do Frame
 #DEFINE FWSTD_LYR_TITLE	"QFrame { color: #696969;" +;
 							"    border: 1px solid #CAC9C5;" +;
 							"    border-radius: 5px;" +;
@@ -67,7 +67,7 @@
 							"background-color: #EFF7FF }"
 
 //======================================================================
-// Gen√©rico Light
+// GenÈrico Light
 //======================================================================
  
 #DEFINE FWSTD_SAY		"{ color: #000000; border: none; background: transparent; } "
@@ -75,7 +75,7 @@
 
 #DEFINE FWSTD_SAY_TITLE "{ color: "+__aColorPallet[3]+"; border: none; background: transparent; } "
 
-//Bot√£o principal (focal)
+//Bot„o principal (focal)
 #DEFINE FWSTD_BTN_FOCAL	"TButton { font: bold; "+;
 						"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 "+__aColorPallet[6]+", stop: 1 "+__aColorPallet[7]+");"+;
 						"    color: #FFFFFF; "+;
@@ -99,7 +99,7 @@
 						"TButton:disabled {	color: #FFFFFF; "+;
 						"    background-color: "+__aColorPallet[32]+"; }"						
 
-//Bot√£o principal (focal) HTML
+//Bot„o principal (focal) HTML
 #DEFINE FWSTD_BTN_FOCAL_HTML " button{ font: bold; "+;
 						"    background-color: "+__aColorPallet[6]+"; "+;
 						"    color: #FFFFFF; "+;
@@ -110,7 +110,7 @@
 						"button:pressed {	background: "+__aColorPallet[7]+" !important;}"+;
 						"TButton.focus {box-shadow: none !important;}" 
 
-//Bot√µes secund√°rios
+//Botıes secund·rios
 #DEFINE FWSTD_BTN_NML	"TButton { color: #4F545E; "+;
 						"    background-color : qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFFFF, stop: 1 #E6E6E6);"+;
 						"    border-width: 1px; "+;
@@ -135,7 +135,7 @@
 						"TButton:disabled {	color: #393939; "+;
 						"    background-color: #E5EAF2; }"
 
-//Bot√µes secund√°rios HTML
+//Botıes secund·rios HTML
 #DEFINE FWSTD_BTN_NML_HTML "button{ font: bold; "+;
 						"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFFFF, stop: 1 #E6E6E6); "+;
 						"    color: #4F545E; "+;
@@ -150,7 +150,7 @@
 						"	opacity: 1 !important; }"
 
 //COMBOBOX
-#DEFINE FWSTD_CBX	"TComboBox { font: arial; "+;
+#DEFINE FWSTD_CBX	"TComboBox { font-family: arial; "+;
 					"    color: #000000; "+;
 					"    max-height: 30px; "+;
 					"    padding-left: 5px; "+;
@@ -184,10 +184,10 @@
     				"    padding-left: 1px; "+;
 					"}"+;
 					"tLabel{color: #000000;}"+;
-					FWGetCss("",CSS_SCROLLBOX)//pega as configura√ß√µes do scrollbar
+					FWGetCss("",CSS_SCROLLBOX)//pega as configuraÁıes do scrollbar
 					
 //COMBOBOX HTML
-#DEFINE FWSTD_CBX_HTML " {font: arial; "+;
+#DEFINE FWSTD_CBX_HTML " {font-family: arial; "+;
 					"    color: #000000; "+;
 					"    max-height: 30px !important; "+;
 					"    line-height: 27px !important;"+;
@@ -207,12 +207,12 @@
 					"    background-color: #E8EBF1 !important;"+;
 					"    border: 1px solid #C5C9CA !important;"+;
 					"    border-radius: 3px; !important;}"+;
-					"TComboBox.focus{ border: 1px solid "+__aColorPallet[30]+" !important; }"+;
+					"TComboBox:focus{ border: 1px solid "+__aColorPallet[30]+" !important; }"+;
 					"span{border-right: 1px solid #c0c0c0 !important; background: white; color: black;}"
 
 
 //COMBOBOX ERROR
-#DEFINE FWSTD_CBX_ERROR	"TComboBox { font: arial; "+;
+#DEFINE FWSTD_CBX_ERROR	"TComboBox { font-family: Arial; "+;
 					"    color: #000000; "+;
 					"    max-height: 30px; "+;
 					"    padding-left: 5px; "+;
@@ -241,7 +241,7 @@
     				"    height: 25px;"+;
 					"}"+;
 					"tLabel{color: #000000;}"+;
-					FWGetCss("",CSS_SCROLLBOX)//pega as configura√ß√µes do scrollbar
+					FWGetCss("",CSS_SCROLLBOX)//pega as configuraÁıes do scrollbar
 
 //TGET
 #DEFINE FWSTD_GET	"TGet { color: #000000; selection-background-color: "+__aColorPallet[9]+";"+;
@@ -265,7 +265,7 @@
 					"    border-radius: 3px; }"+;
 					"tLabel{color: #000000;}"
 
-//TGET COM HASSBUTTON (CONSULTA PADR√ÉO, CALCULADORA E CALENDARIO)
+//TGET COM HASSBUTTON (CONSULTA PADR√O, CALCULADORA E CALEND¡RIO)
 #DEFINE FWSTD_GET_HASBTN "TGet{ color: #000000; selection-background-color: "+__aColorPallet[9]+";"+;
 					"    background-color: #FFFFFF; "+;
 					"    padding-left: 3px; "+;
@@ -354,15 +354,15 @@
 					"TRadioButtonItem::indicator::checked { image: url(rpo:fwskin_rdo_checked.png); }"+;
 					"TRadioButtonItem::indicator::unchecked { image: url(rpo:fwskin_rdo_unchecked.png); }"
 
-//SCROLLBAR - TAMB√âM UTILIZADO NO BROWSE
+//SCROLLBAR - TAMB…M UTILIZADO NO BROWSE
 #DEFINE FWSTD_SCR	"QScrollBar:horizontal{ background-color: #F2F2F2;"+;
-					"	border: 1px solid #C5C9CA; "+;
+					"	border: 1px solid "+ iif(totvs.framework.css.isNewAlphaCss(),"#045B8F","#C5C9CA") + "; "+;
 					"	margin: 0 15px 0px 16px; "+;
 					"	max-height: 16px; "+;
 					"	min-height: 16px; }"+;
 					"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {"+;
-     				"	background: #F2F2F2;}"+;
-					"QScrollBar::handle:horizontal{ background-color: #B2B2B2; "+;
+     				"	background: #F2F2F2;}"+/*Cor de fundo do scroll horizontal*/;
+					"QScrollBar::handle:horizontal{ background-color: "+iif(totvs.framework.css.isNewAlphaCss(),__aColorPallet[34], "#B2B2B2")+" ; "+/*cor da barra de rolagem horizontal*/;
 					"	border: 3px solid #F2F2F2; border-radius: 7px; min-width:20px; }"+;
 					"QScrollBar::add-line:horizontal{ border-image:url(rpo:fwskin_scroll_hrz_btn_rgt_nml.png) 2 2 2 2 stretch; border:1px solid black; }"+;
 					"QScrollBar::add-line:horizontal:pressed{ border-image:url(rpo:fwskin_scroll_hrz_btn_rgt_nml.png) 2 2 2 2 stretch; }"+;
@@ -394,7 +394,7 @@
      				"	background: #F2F2F2;}"+;
 					"QScrollBar::handle:vertical{ background-color: #B2B2B2; "+;
 					"	border: 3px solid #F2F2F2; border-radius: 7px; min-height:20px; }"+;
-					"QScrollBar::add-line:vertical{ border-image:url(rpo:fwskin_scroll_vrt_btn_btm_nml.png) 2 2 2 2 stretch; }"+;
+					"QScrollBar::add-line:vertical{ "+ iif(totvs.framework.css.isNewAlphaCss(),"border-color: #32b52d;",'') + " border-image:url(rpo:fwskin_scroll_vrt_btn_btm_nml.png) 2 2 2 2 stretch; }"+;
 					"QScrollBar::add-line:vertical:pressed{ border-image:url(rpo:fwskin_scroll_vrt_btn_btm_nml.png) 2 2 2 2 stretch; }"+;
 					"QScrollBar::add-line:vertical{ border-top-width:2px;"+;
 					"	border-right-width:2px;"+;
@@ -427,21 +427,33 @@
 					"Q3ListView:hover{ border: 1px solid #77A7FB; }"+;
 					"Q3ListView:focus{ border: 1px solid #77A7FB; }"
 
-//TGET TIPO MEMO
-#DEFINE FWSTD_MULTIGET "Q3TextEdit{ color: #000000; "+;
+//TGET TIPO MEMO - O read-only funciona no QT e o disabled no Webapp, foi necess·rio manter ambos
+#DEFINE FWSTD_MULTIGET "QTextEdit{ color: #000000; "+;
 						"    background-color: #FFFFFF; "+;
 						"    border: 2px ridge #C5C9CA; "+;
 						"    border-radius: 3px; }"+;
-						"Q3TextEdit:hover { border: 2px ridge "+__aColorPallet[30]+";  }"+;
-						"Q3TextEdit:focus { border: 2px ridge "+__aColorPallet[30]+";  }"+;
-						"tLabel{color: #666666;}"
+						"QTextEdit:read-only { color:#000000; "+;
+						"    background-color: #E8EBF1; "+;
+						"    border: 2px ridge #C5C9CA; "+;
+						"    border-radius: 3px; }"+;
+						"QTextEdit:read-only:hover { border: 2px ridge #C5C9CA;  }"+;
+						"QTextEdit:read-only:focus { border: 2px ridge #C5C9CA;  }"+;
+						"QTextEdit:disabled { color:#000000; "+;
+						"    background-color: #E8EBF1; "+;
+						"    border: 2px ridge #C5C9CA; "+;
+						"    border-radius: 3px; }"+;
+						"QTextEdit:disabled:hover { border: 2px ridge #C5C9CA;  }"+;
+						"QTextEdit:disabled:focus { border: 2px ridge #C5C9CA;  }"+;
+						"QTextEdit:hover { border: 2px ridge "+__aColorPallet[30]+";  }"+;
+						"QTextEdit:focus { border: 2px ridge "+__aColorPallet[30]+";  }"+;
+						"tLabel{color: #000000;}"
 
 //TGET TIPO MEMO ERROR
-#DEFINE FWSTD_MULTIGET_ERROR "Q3TextEdit{ color: #000000; "+;
+#DEFINE FWSTD_MULTIGET_ERROR "QTextEdit{ color: #000000; "+;
 						"    background-color: #fff2f0; "+;
 						"    border: 2px ridge #D3362C; "+;
 						"    border-radius: 3px; }"+;
-						"tLabel{color: #666666;}"
+						"tLabel{color: #000000;}"
 
 //BARRA DE PROGRESSO
 #DEFINE FWSTD_METER	"QProgressBar { border: 1px solid #B8B9B8; " +;
@@ -537,7 +549,7 @@
 				      "                                  border: 1px solid #CCCCCC;}"+;
 				      FWGetCss("",CSS_SCROLLBOX)
 
-//FOLDER SECUND√ÅRIO
+//FOLDER SECUND¡RIO
 #DEFINE FWSTD_SEC_FLD	"QTabBar{ border: none;}"+;
                     "QTabBar::tab{ background-color: white; "+;
                     "    border: none; "+;
@@ -617,8 +629,8 @@
 						"    border: none; "+;
 						"    color: #808080; }"
 
-//Bot√£o principal (focal) do browse
-#DEFINE	FWSTD_BRW_OPT_FOCAL  "TButton { font: bold; "+;
+//Bot„o principal (focal) do browse
+#DEFINE	FWSTD_BRW_OPT_FOCAL  "TButton { font-weight: bold; "+;
 						"    background-color: #337797; "+;
 						"    color: #FFF; "+;
 						"    border-width: 1px; "+;
@@ -652,7 +664,7 @@
 						"    padding-left: 0px; "+;
 						"    padding-right: 0px; }"
 
-//Bot√µes segund√°rios do browse
+//Botıes segund·rios do browse
 #DEFINE	FWSTD_BRW_OPT  "TButton { color: #4F545E; "+;
 						"    background-color : qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFFFF, stop: 1 #F5F5F5);"+;
 						"    border-color: #FFFFFF; "+;
@@ -690,7 +702,7 @@
 						"    padding-left: 0px; "+;
 						"    padding-right: 0px; }"
 
-//Bot√£o terci√°rio (usado apenas para links)
+//Bot„o terci·rio (usado apenas para links)
 #DEFINE	FWSTD_BRW_OPT_TWO  "TButton{ font: bold; "+;
 						"    text-decoration: underline;"+;
 						"    background-color: transparent; "+;

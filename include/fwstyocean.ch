@@ -223,7 +223,7 @@
 #DEFINE FWOCN_TREE	"Q3ListView{ color: #2462A6; }"+;
 					"Q3ListView{ border: 1px solid #DFDFDF; }"
 
-#DEFINE FWOCN_MULTIGET	"Q3TextEdit{ color: #000000; "+;
+#DEFINE FWOCN_MULTIGET	"QTextEdit{ color: #000000; "+;
 					"    border: 1px solid #ABADB3 }"
 
 #DEFINE FWOCN_PRC	"QProgressBar { border-image: url(rpo:fwocn_mtr_bg.png) 2 2 2 2 round stretch; "+;

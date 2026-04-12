@@ -155,3 +155,15 @@ AutoFiltro (0055) - Novo comando
 ********************************************/
 #Define REL_CMD_AUTOFILTER   "0055"
 
+/*******************************************
+AutoFiltro (0056) - Linhas de Grade
+0056	- 4 bytes   Identificador do comando
+0000001	- 7 bytes   Tipo de exibição. Consulte a tabela correspondente para conhecer os valores disponíveis.
+********************************************/
+#Define REL_CMD_LINES_GRID "0056"
+
+// Tipo de exibição
+#Define LINEGRID_HIDE        "0"
+#Define LINEGRID_SHOW_SCREEM "1"
+#Define LINEGRID_SHOW_PRINT  "2"
+#Define LINEGRID_SHOW_ALL    "3"

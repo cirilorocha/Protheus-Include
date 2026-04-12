@@ -830,10 +830,10 @@
 #xcommand PUBLISH MODEL REST NAME <name> [ SOURCE <source> ] [ RESOURCE OBJECT <resObject> ] ;
 	=>;
 		Web Function <name>_PMR_();;
-		Return {{"name",\"<name>\"},{"type","model"}[,{"source",\"<source>\"}][,{"resObject",\"<resObject>\"}]}
+		Return {{"name",\"<name>\"},{"type","model"}[,{"source",<(source)>}][,{"resObject",<(resObject)>}]}
 
 #xcommand PUBLISH USER MODEL REST NAME <name> [ SOURCE <source> ] [ RESOURCE OBJECT <resObject> ] ;
 	=>;
 		User Function <name>_PMR_();;
-		Return {{"name",\"<name>\"},{"type","user_model"}[,{"source",\"<source>\"}][,{"resObject",\"<resObject>\"}]}
+		Return {{"name",\"<name>\"},{"type","user_model"}[,{"source",<(source)>}][,{"resObject",<(resObject)>}]}
 

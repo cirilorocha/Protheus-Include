@@ -114,6 +114,8 @@ Defines de Atualizacao
 #xtranslate e_RemoveSX1   	        =>  96
 #xtranslate e_RemoveXAU   	        =>  98
 #xtranslate e_UpdateSX9             =>  106
+#xtranslate e_UpdMnuSuccess         =>  107
+#xtranslate e_UpdMnuFailure         =>  108
 
 /*
 Defines de erros
@@ -170,3 +172,4 @@ Defines de erros
 #xtranslate e_PreserveUniqueKey     =>  103
 #xtranslate e_InvalidHashFieldRestr =>  104
 #xtranslate e_UpdateFieldRestr      =>  105
+

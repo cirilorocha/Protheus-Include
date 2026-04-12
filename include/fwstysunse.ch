@@ -218,18 +218,18 @@
 #DEFINE FWSST_TREE	"Q3ListView{ color: #472929; }"+;
 					"Q3ListView{ border: 1px solid #DFDFDF; }"
 
-#DEFINE FWSST_MULTIGET	"Q3TextEdit{ color: #472929; selection-background-color: #CA5F5E;"+;
+#DEFINE FWSST_MULTIGET	"QTextEdit{ color: #472929; selection-background-color: #CA5F5E;"+;
 						"    border-image: url(rpo:fwsst_get_nml.png) 3 3 3 3 stretch; "+;
 						"    border-top-width: 3px; "+;
 						"    border-left-width: 3px; "+;
 						"    border-right-width: 3px; "+;
 						"    border-bottom-width: 3px; }"+;
-						"Q3TextEdit:hover { border-image: url(rpo:fwsst_get_hvr.png) 3 3 3 3 stretch; "+;
+						"QTextEdit:hover { border-image: url(rpo:fwsst_get_hvr.png) 3 3 3 3 stretch; "+;
 						"    border-top-width: 3px; "+;
 						"    border-left-width: 3px; "+;
 						"    border-right-width: 3px; "+;
 						"    border-bottom-width: 3px; }"+;
-						"Q3TextEdit:focus { border-image: url(rpo:fwsst_get_sld.png) 3 3 3 3 stretch; "+;
+						"QTextEdit:focus { border-image: url(rpo:fwsst_get_sld.png) 3 3 3 3 stretch; "+;
 						"    border-top-width: 3px; "+;
 						"    border-left-width: 3px; "+;
 						"    border-right-width: 3px; "+;

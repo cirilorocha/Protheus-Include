@@ -19,9 +19,10 @@
 				 [ SIZE <aCoors,...> ] ;
 				 [ MODEL <nModel>  ] ;
 				 [ <lEscClose: NOTESC> ];
+				 [ <lCloseX: NOTCLOSEX> ];
 		 => ;
 			 <oWizard> = APWizard():New( <chTitle>, <chMsg>, <cTitle>, <cText>,;
-										 <bNext>, <bFinish>, <.lPanel.>, , , <.lNoFirst.> , [\{<aCoors>\}] , [<nModel>], <.lEscClose.>)
+										 <bNext>, <bFinish>, <.lPanel.>, , , <.lNoFirst.> , [\{<aCoors>\}] , [<nModel>], <.lEscClose.>, <.lCloseX.>)
 					  
 #xcommand ACTIVATE WIZARD <oWizard> ;
 				 [ <lCenter: CENTER, CENTERED> ];
